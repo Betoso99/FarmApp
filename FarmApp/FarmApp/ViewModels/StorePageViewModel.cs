@@ -10,19 +10,13 @@ namespace FarmApp.ViewModels
 	public class StorePageViewModel : ViewModelBase
 	{
 		public INavigationService _navigationService { get; set; }
-		public DelegateCommand Nav { get; set; }
 
 		public StorePageViewModel(INavigationService navigationService) :
 			base(navigationService)
 		{
-			Title = "Store Page";
+			Title = "Store";
 			_navigationService = navigationService;
-			Nav = new DelegateCommand(NavigationExecute);
 		}
 
-		async void NavigationExecute()
-		{
-			await _navigationService.GoBackAsync();
-		}
 	}
 }
