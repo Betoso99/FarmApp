@@ -29,7 +29,8 @@ namespace FarmApp.ViewModels
 
 		async void BackHome()
 		{
-			await _navigationService.NavigateAsync(new System.Uri("HomePage", System.UriKind.Absolute));
+			//await _navigationService.NavigateAsync(new Uri("HomePage", System.UriKind.Absolute));
+			await _navigationService.GoBackAsync();
 		}
 	}
 }

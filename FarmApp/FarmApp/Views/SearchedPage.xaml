@@ -8,7 +8,7 @@
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
         <Label Text="{Binding Title}"/>
         <Button Text="Navigate to SearchedPage" Command="{Binding Nav}"/>
-        <Button Text="Go Back Home" Command=""/>
+        <Button Text="Go Back Home" Command="{Binding Back}"/>
     </StackLayout>
 
 </ContentPage>
