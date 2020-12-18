@@ -28,15 +28,15 @@ namespace FarmApp.ViewModels
 		public HomePageViewModel(INavigationService navigationService, IPageDialogService dialogService) :
 			base(navigationService)
 		{
+			Title = "Home Page - Here goes the map and search input";
 			_dialogService = dialogService;
-			Title = "Home Page";
 			_navigationService = navigationService;
-			Nav = new DelegateCommand(NavigationExecute);
 
-			GetRouteCommand = new DelegateCommand(async () => await GetDataDirections(_dialogService));
+			Nav = new DelegateCommand(async()=> await NavigationExecute());
+			GetRouteCommand = new DelegateCommand(async () => await GetDataDirections());
 		}
 
-		async Task GetDataDirections(IPageDialogService dialogService)
+		async Task GetDataDirections()
 		{
 			const string ApiBaseAddress = "https://maps.googleapis.com/maps/";
 			var mapsAPI = RestService.For<IGoogleMapsAPIService>(ApiBaseAddress);
@@ -44,31 +44,15 @@ namespace FarmApp.ViewModels
 
 			if (directions.Routes != null && directions.Routes.Count > 0)
 			{
-				//var positions = Enumerable.ToList(PolylineHelper.Decode(directions.Routes.First().OverviewPolyline.Points));
-				//CalculateRouteCommand.Execute(positions);
-
-				//Location tracking simulation
-				//Device.StartTimer(TimeSpan.FromSeconds(1), () =>
-				//{
-					//if (positions.Count > positionIndex)
-					//{
-					//	UpdatePositionCommand.Execute(positions[positionIndex]);
-					//	positionIndex++;
-					//	return true;
-					//}
-					//else
-					//{
-						//return false;
-					//}
-				//});
+				
 			}
 			else
-				await dialogService.DisplayAlertAsync("No route", "No route found", "Ok");
+				await _dialogService.DisplayAlertAsync("No route", "No route found", "Ok");
 		}
 
-		async void NavigationExecute()
+		async Task NavigationExecute()
 		{
-			await _navigationService.NavigateAsync("SearchedPage");
+			await _navigationService.NavigateAsync($"{Constants.StorePage}?selectedTab={Constants.InfoPage}");
 		}
 	}
 }

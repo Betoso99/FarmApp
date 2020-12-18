@@ -10,6 +10,8 @@ namespace FarmApp.ViewModels
 {
 	public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible, INotifyPropertyChanged
 	{
+		public event PropertyChangedEventHandler PropertyChanged;
+
 		protected INavigationService NavigationService { get; private set; }
 
 		private string _title;

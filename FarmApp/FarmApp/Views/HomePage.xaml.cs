@@ -12,10 +12,5 @@ namespace FarmApp.Views
 			InitializeComponent();
 		}
 
-		protected async override void OnAppearing()
-        {
-			base.OnAppearing();
-        }
-		
 	}
 }
