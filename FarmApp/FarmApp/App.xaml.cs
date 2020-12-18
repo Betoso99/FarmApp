@@ -2,15 +2,16 @@ using FarmApp.ViewModels;
 using FarmApp.Views;
 using Prism;
 using Prism.Ioc;
+using Prism.Unity;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 
 namespace FarmApp
 {
-	public partial class App
+	public partial class App : PrismApplication
 	{
-		public App(IPlatformInitializer initializer)
+		public App(IPlatformInitializer initializer = null)
 			: base(initializer)
 		{
 		}
@@ -28,7 +29,6 @@ namespace FarmApp
 			containerRegistry.RegisterForNavigation<SearchedPage, SearchedPageViewModel>();
 			containerRegistry.RegisterForNavigation<StorePage, StorePageViewModel>();
 			containerRegistry.RegisterForNavigation<MapPage, MapPageViewModel>();
-			containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
 		}
 	}
 }
