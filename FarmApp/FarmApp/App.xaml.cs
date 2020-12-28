@@ -1,3 +1,4 @@
+using FarmApp.Services;
 using FarmApp.ViewModels;
 using FarmApp.Views;
 using Prism;
@@ -32,6 +33,8 @@ namespace FarmApp
             containerRegistry.RegisterForNavigation<InfoPage, InfoPageViewModel>(Constants.InfoPage);
             containerRegistry.RegisterForNavigation<OptionsPage, OpinionsPageViewModel>(Constants.OpinionsPage);
             containerRegistry.RegisterForNavigation<SharePage, SharePageViewModel>(Constants.SharePage);
+
+			containerRegistry.Register<IGoogleMapsService, GoogleMapsService>();
         }
 	}
 }

@@ -12,5 +12,11 @@ namespace FarmApp.Views
 			InitializeComponent();
 		}
 
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+			map.GetCurrentLocationCommand.Execute(null);
+		}
+
 	}
 }

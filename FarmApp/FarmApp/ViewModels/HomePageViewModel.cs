@@ -1,4 +1,6 @@
-﻿using FarmApp.Services;
+﻿using FarmApp.Helpers;
+using FarmApp.Models;
+using FarmApp.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -9,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 
 namespace FarmApp.ViewModels
 {
@@ -16,6 +19,7 @@ namespace FarmApp.ViewModels
 	{
 		public INavigationService _navigationService { get; set; }
 		public IPageDialogService _dialogService { get; set; }
+		public IGoogleMapsService _googleMapsService { get; set; }
 
 		public DelegateCommand Nav { get; set; }
 		public DelegateCommand GetRouteCommand { get; set; }
@@ -25,28 +29,32 @@ namespace FarmApp.ViewModels
 		public string DestinationLongitude { get; set; }
 		public string DestinationLatitude { get; set; }
 
-		public HomePageViewModel(INavigationService navigationService, IPageDialogService dialogService) :
+		public HomePageViewModel(INavigationService navigationService, IPageDialogService dialogService, IGoogleMapsService googleMapsService) :
 			base(navigationService)
 		{
-			Title = "Home Page - Here goes the map and search input";
 			_dialogService = dialogService;
 			_navigationService = navigationService;
+			_googleMapsService = googleMapsService;
 
 			Nav = new DelegateCommand(async()=> await NavigationExecute());
-			GetRouteCommand = new DelegateCommand(async () => await GetDataDirections());
+			GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
 		}
 
-		async Task GetDataDirections()
+		async Task GetDataDirectionsAsync()
 		{
-			const string ApiBaseAddress = "https://maps.googleapis.com/maps/";
-			var mapsAPI = RestService.For<IGoogleMapsAPIService>(ApiBaseAddress);
-			var directions = await mapsAPI.GetDirections(OriginLatitude, OriginLongitude, DestinationLatitude, DestinationLongitude, Constants.GoogleMapsApiKey);
-
-			if (directions.Routes != null && directions.Routes.Count > 0)
+			if (Connectivity.NetworkAccess != NetworkAccess.Internet)
 			{
-				
+				await _dialogService.DisplayAlertAsync("Error", "Please check your internet connection", "Ok");
+				return;
 			}
-			else
+
+			GoogleDirection directions = await _googleMapsService.GetDirectionAsync(OriginLatitude, OriginLongitude, DestinationLatitude, DestinationLongitude);
+
+			if (directions?.Routes != null && directions.Routes.Count > 0)
+			{
+				var positions = (Enumerable.ToList(PolylineHelper.Decode(directions.Routes.First().OverviewPolyline.Points)));
+			}
+            else 
 				await _dialogService.DisplayAlertAsync("No route", "No route found", "Ok");
 		}
 
