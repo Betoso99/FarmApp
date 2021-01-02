@@ -3,11 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="FarmApp.Views.MapPage">
-
+             x:Class="FarmApp.Views.SharePage"
+             Title="{Binding Title}">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-        <Label Text="{Binding Title}"/>
-        <Button Text="Navigate to SearchedPage" Command="{Binding Nav}"/>
+        <Label Text="Store Share Link"/>
     </StackLayout>
-    
+  
 </ContentPage>

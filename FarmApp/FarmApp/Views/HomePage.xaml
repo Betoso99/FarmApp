@@ -2,11 +2,34 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:controls="clr-namespace:FarmApp.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="FarmApp.Views.HomePage">
+             x:Class="FarmApp.Views.HomePage"
+             NavigationPage.HasNavigationBar="False">
+    <AbsoluteLayout Margin="0">
+        
+        <controls:CustomMap  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional"
+                            x:Name="map"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            CurrentLocation="{Binding CurrentLocation}"
+                            PinsSource="{Binding Pins}"/>
 
-    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-        <Label Text="{Binding Title}"/>
-        <Button Text="Navigate to SearchedPage" Command="{Binding Nav}"/>
-    </StackLayout>
+        <Frame AbsoluteLayout.LayoutBounds="0.5,0.03,0.9,0.06" AbsoluteLayout.LayoutFlags="All"
+            CornerRadius="10" BackgroundColor="White" Padding="10,0,10,0">
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Entry Placeholder="Search" HorizontalOptions="FillAndExpand"/>
+                <ImageButton Source="search.png" WidthRequest="30" BackgroundColor="Transparent" Margin="0"
+                             Command="{Binding SearchCommand}"/>
+            </StackLayout>
+        </Frame>
+
+        <Frame  BackgroundColor="White" Padding="0" Margin="0" IsClippedToBounds="True" CornerRadius="150"
+            AbsoluteLayout.LayoutBounds="0.05,0.97,40,40" AbsoluteLayout.LayoutFlags="PositionProportional">
+            <ImageButton Source="location.png"  Margin="0" Padding="10"  BackgroundColor="Transparent" CornerRadius="150" Aspect="AspectFill"
+                           Command="{Binding CurrentLocationCommand}"/>
+        </Frame>
+
+    </AbsoluteLayout>
+    
 </ContentPage>

@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using FarmApp.Services;
+using Refit;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace FarmApp.Views
 {
@@ -8,5 +11,6 @@ namespace FarmApp.Views
 		{
 			InitializeComponent();
 		}
+
 	}
 }

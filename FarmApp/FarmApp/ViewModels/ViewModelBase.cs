@@ -8,8 +8,9 @@ using System.Text;
 
 namespace FarmApp.ViewModels
 {
-	public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible, INotifyPropertyChanged
+	public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible
 	{
+
 		protected INavigationService NavigationService { get; private set; }
 
 		private string _title;

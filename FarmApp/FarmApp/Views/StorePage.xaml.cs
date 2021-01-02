@@ -2,7 +2,7 @@
 
 namespace FarmApp.Views
 {
-	public partial class StorePage : ContentPage
+	public partial class StorePage : TabbedPage
 	{
 		public StorePage()
 		{
