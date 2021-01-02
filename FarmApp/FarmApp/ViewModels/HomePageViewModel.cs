@@ -8,10 +8,12 @@ using Prism.Services;
 using Refit;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
+using Xamarin.Forms.GoogleMaps;
 
 namespace FarmApp.ViewModels
 {
@@ -21,10 +23,14 @@ namespace FarmApp.ViewModels
 		public IPageDialogService _dialogService { get; set; }
 		public IGoogleMapsService _googleMapsService { get; set; }
 
-		public DelegateCommand Nav { get; set; }
 		public DelegateCommand GetRouteCommand { get; set; }
+		public DelegateCommand SearchCommand { get; set; }
+		public DelegateCommand CurrentLocationCommand { get; set; }
 
-		public string OriginLongitude { get; set; }
+		public Location CurrentLocation { get; set; }
+        public ObservableCollection<Pin> Pins { get; set; }
+
+        public string OriginLongitude { get; set; }
 		public string OriginLatitude { get; set; }
 		public string DestinationLongitude { get; set; }
 		public string DestinationLatitude { get; set; }
@@ -36,9 +42,55 @@ namespace FarmApp.ViewModels
 			_navigationService = navigationService;
 			_googleMapsService = googleMapsService;
 
-			Nav = new DelegateCommand(async()=> await NavigationExecute());
+			Task.Run(SetCurrentLocation).Wait();
+            Pins = new ObservableCollection<Pin>();
+
 			GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
+
+			SearchCommand = new DelegateCommand(async () => await OnSearchAsync());
+			CurrentLocationCommand = new DelegateCommand(async () => await SetCurrentLocation());
 		}
+
+		async Task SetCurrentLocation()
+        {
+			try
+			{
+				CurrentLocation = await Geolocation.GetLastKnownLocationAsync();
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine(ex.Message);
+			}
+		}
+
+		async Task OnSearchAsync()
+        {
+            // Aqui va el codigo para obtener las farmacias que correspondan con el producto a buscar
+            //luego se crean una lista de pins con esa info
+
+            IList<Pin> pins = new List<Pin>();
+			Pin newPin = new Pin
+			{
+				Type = PinType.Place,
+				Position = new Position(18.495791, -69.851877),
+				Label = "Current",
+				Address = "Location",
+				Tag = string.Empty
+			};
+
+			newPin.Clicked += OnPinClick;
+
+			pins.Add(newPin);
+
+			Pins = new ObservableCollection<Pin>(pins);
+        }
+
+		private async void OnPinClick(object sender, EventArgs e)
+		{
+			Pin pin = (Pin)sender;
+			await _navigationService.NavigateAsync($"{Constants.StorePage}");
+		}
+
 
 		async Task GetDataDirectionsAsync()
 		{
@@ -54,13 +106,12 @@ namespace FarmApp.ViewModels
 			{
 				var positions = (Enumerable.ToList(PolylineHelper.Decode(directions.Routes.First().OverviewPolyline.Points)));
 			}
-            else 
+            else
+            {
 				await _dialogService.DisplayAlertAsync("No route", "No route found", "Ok");
+            }
 		}
 
-		async Task NavigationExecute()
-		{
-			await _navigationService.NavigateAsync($"{Constants.StorePage}?selectedTab={Constants.InfoPage}");
-		}
+		
 	}
 }

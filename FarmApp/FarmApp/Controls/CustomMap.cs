@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FarmApp.Models;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,14 +13,31 @@ namespace FarmApp.Controls
 {
     class CustomMap : Xamarin.Forms.GoogleMaps.Map
     {
-        public static readonly BindableProperty GetCurrentLocationCommandProperty =
-          BindableProperty.Create(nameof(GetCurrentLocationCommand), typeof(ICommand), typeof(CustomMap), null, BindingMode.TwoWay);
 
-        public ICommand GetCurrentLocationCommand
+        public static readonly BindableProperty CurrentLocationProperty =
+          BindableProperty.Create(
+             propertyName: nameof(CurrentLocation),
+             returnType: typeof(Location),
+             declaringType: typeof(CustomMap),
+             defaultValue: null,
+             defaultBindingMode: BindingMode.TwoWay,
+             propertyChanged: CurrentLocationPropertyChanged);
+
+        public static readonly BindableProperty PinsSourceProperty =
+            BindableProperty.Create(nameof(PinsSource), typeof(IEnumerable), typeof(CustomMap), null,
+                                     BindingMode.TwoWay, null, PinsSourcePropertyChanged);
+
+        public Location CurrentLocation
         {
-            get { return (ICommand)GetValue(GetCurrentLocationCommandProperty); }
-            set { SetValue(GetCurrentLocationCommandProperty, value); }
+            get { return (Location)GetValue(CurrentLocationProperty); }
+            set { SetValue(CurrentLocationProperty, value); }
         }
+        public IEnumerable PinsSource
+        {
+            get { return (IEnumerable)GetValue(PinsSourceProperty); }
+            set { SetValue(PinsSourceProperty, value); }
+        }
+
 
         public CustomMap()
         {
@@ -28,40 +47,45 @@ namespace FarmApp.Controls
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
-            if (BindingContext != null)
-            {
-                GetCurrentLocationCommand = new Command(async () => await GetCurrentLocation());
-            }
+            //if (BindingContext != null)
+            //{
+            //    GetCurrentLocationCommand = new Command(async () => await GetCurrentLocation());
+            //}
         }
 
-        async Task GetCurrentLocation()
+        private static void CurrentLocationPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            try
+            Location location = newValue as Location;
+            CustomMap targetControl = (CustomMap)bindable;
+            targetControl.Pins.Clear();
+
+            var pin = new Xamarin.Forms.GoogleMaps.Pin
             {
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                Type = PinType.Place,
+                Position = new Position(location.Latitude, location.Longitude),
+                Label = "Current",
+                Address = "Location",
+                Tag = string.Empty
+            };
 
-                if (location != null)
-                {
-                    var pin = new Xamarin.Forms.GoogleMaps.Pin
-                    {
-                        Type = PinType.Place,
-                        Position = new Position(location.Latitude, location.Longitude),
-                        Label = "Current",
-                        Address = "Location",
-                        Tag = string.Empty
-                    };
-                    Pins.Add(pin);
+            targetControl.Pins.Add(pin);
+            targetControl.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.3)));
 
-                    InitialCameraUpdate = CameraUpdateFactory.NewPositionZoom(new Position(location.Latitude, location.Longitude), 15d);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
         }
 
+        private static void PinsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            IEnumerable<Pin> pins = newValue as IEnumerable<Pin>;
+            CustomMap targetControl = (CustomMap)bindable;
+            Pin CurrentLocationPin = targetControl.Pins[0];
 
+            targetControl.Pins.Clear();
+
+            targetControl.Pins.Add(CurrentLocationPin);
+            foreach (Pin p in pins)
+            {
+                targetControl.Pins.Add(p);
+            }
+        }
     }
 }
