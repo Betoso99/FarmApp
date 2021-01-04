@@ -5,8 +5,26 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.InfoPage"
              Title="{Binding Title}">
-    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-        <Label Text="Store Information"/>
-    </StackLayout>
-  
+    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Direction: " Grid.Row="0" Grid.Column="0"/>
+        <Label x:Name="Direction" Text="{Binding Direction}" Grid.Row="0" Grid.Column="1"/>
+        <Label Text="Schedule" Grid.Row="1" Grid.Column="0"/>
+        <Label x:Name="Schedule" Text="{Binding Schedule}" Grid.Row="1" Grid.Column="1"/>
+        <Label Text="Phone" Grid.Row="2" Grid.Column="0"/>
+        <Label x:Name="Phone" Text="{Binding Phone}" Grid.Row="2" Grid.Column="1"/>
+        <Label Text="Web" Grid.Row="3" Grid.Column="0"/>
+        <Label x:Name="Web" Text="{Binding Web}" Grid.Row="3" Grid.Column="1"/>
+    </Grid>
+
 </ContentPage>
