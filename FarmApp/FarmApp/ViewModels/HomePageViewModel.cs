@@ -40,7 +40,7 @@ namespace FarmApp.ViewModels
 		{
 			_dialogService = dialogService;
 			_navigationService = navigationService;
-			_googleMapsService = googleMapsService;
+			_googleMapsService = googleMapsService; 
 
 			Task.Run(SetCurrentLocation).Wait();
             Pins = new ObservableCollection<Pin>();
@@ -72,7 +72,7 @@ namespace FarmApp.ViewModels
 			Pin newPin = new Pin
 			{
 				Type = PinType.Place,
-				Position = new Position(18.495791, -69.851877),
+				Position = new Position(18.468780, -69.922476),
 				Label = "Current",
 				Address = "Location",
 				Tag = string.Empty

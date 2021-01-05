@@ -5,8 +5,20 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.OptionsPage"
              Title="{Binding Title}">
-    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-        <Label Text="Store Opinions"/>
-    </StackLayout>
+    <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" ItemsSource="{Binding Opinions}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="{Binding Name}" Grid.Row="0"/>
+                    <Label Text="{Binding Opinion}" Grid.Row="1"/>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
   
 </ContentPage>

@@ -10,6 +10,10 @@ namespace FarmApp.ViewModels
     public class InfoPageViewModel : ViewModelBase
     {
         public INavigationService _navigationService { get; set; }
+        public string Direction { get; set; }
+        public string Schedule { get; set; }
+        public string Phone { get; set; }
+        public string Web { get; set; }
 
         public InfoPageViewModel(INavigationService navigationService) :
             base(navigationService)

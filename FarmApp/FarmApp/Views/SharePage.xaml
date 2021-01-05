@@ -6,7 +6,10 @@
              x:Class="FarmApp.Views.SharePage"
              Title="{Binding Title}">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-        <Label Text="Store Share Link"/>
+        <Label Text="{Binding Link}"/>
+        <Frame IsClippedToBounds="True" Padding="0" CornerRadius="200">
+            <Button Text="Copy" Command="{Binding CopyCommand}"/>
+        </Frame>
     </StackLayout>
   
 </ContentPage>

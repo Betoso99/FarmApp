@@ -7,7 +7,6 @@
              x:Class="FarmApp.Views.StorePage"
             Title="{Binding Title}">
     <TabbedPage.Children>
-        <views:DirectionPage/>
         <views:InfoPage/>
         <views:OptionsPage/>
         <views:SharePage/>
