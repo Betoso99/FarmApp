@@ -40,26 +40,36 @@ namespace FarmApp.ViewModels
 		{
 			_dialogService = dialogService;
 			_navigationService = navigationService;
-			_googleMapsService = googleMapsService; 
+			_googleMapsService = googleMapsService;
 
-			Task.Run(SetCurrentLocation).Wait();
-            Pins = new ObservableCollection<Pin>();
+			CurrentLocation = null;
+			Pins = null;
+			SetCurrentLocation();
 
-			GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
+            GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
 
 			SearchCommand = new DelegateCommand(async () => await OnSearchAsync());
-			CurrentLocationCommand = new DelegateCommand(async () => await SetCurrentLocation());
+			CurrentLocationCommand = new DelegateCommand(SetCurrentLocation);
 		}
 
-		async Task SetCurrentLocation()
+		void SetCurrentLocation()
         {
-			try
-			{
-				CurrentLocation = await Geolocation.GetLastKnownLocationAsync();
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Debug.WriteLine(ex.Message);
+            try
+            {
+                var task = Geolocation.GetLocationAsync();
+                task.ContinueWith(location =>
+                {
+                    CurrentLocation = location.Result;
+
+                    if (location != null)
+                        CurrentLocation = CurrentLocation;
+
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+				CurrentLocation = CurrentLocation;
 			}
 		}
 

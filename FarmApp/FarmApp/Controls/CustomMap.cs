@@ -55,10 +55,12 @@ namespace FarmApp.Controls
 
         private static void CurrentLocationPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            if (newValue == null)
+                return;
+
             Location location = newValue as Location;
             CustomMap targetControl = (CustomMap)bindable;
-            targetControl.Pins.Clear();
-
+            
             var pin = new Xamarin.Forms.GoogleMaps.Pin
             {
                 Type = PinType.Place,
@@ -68,20 +70,33 @@ namespace FarmApp.Controls
                 Tag = string.Empty
             };
 
-            targetControl.Pins.Add(pin);
+            if (targetControl.Pins.Count != 0)
+            {
+                targetControl.Pins[0] = pin;
+            }
+            else
+            {
+                targetControl.Pins.Add(pin);
+            }
+
             targetControl.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Xamarin.Forms.GoogleMaps.Distance.FromMiles(0.3)));
 
         }
 
         private static void PinsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            if (newValue == null)
+                return;
+
             IEnumerable<Pin> pins = newValue as IEnumerable<Pin>;
             CustomMap targetControl = (CustomMap)bindable;
-            Pin CurrentLocationPin = targetControl.Pins[0];
+            Pin CurrentLocationPin = targetControl.Pins[0] ?? null;
 
             targetControl.Pins.Clear();
 
-            targetControl.Pins.Add(CurrentLocationPin);
+            if (CurrentLocationPin != null)
+                targetControl.Pins.Add(CurrentLocationPin);
+
             foreach (Pin p in pins)
             {
                 targetControl.Pins.Add(p);

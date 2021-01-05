@@ -12,6 +12,7 @@
                             x:Name="map"
                             VerticalOptions="FillAndExpand"
                             HorizontalOptions="FillAndExpand"
+                            InitialCameraUpdate="18.9525671, -70.7208687, 1"
                             CurrentLocation="{Binding CurrentLocation}"
                             PinsSource="{Binding Pins}"/>
 
