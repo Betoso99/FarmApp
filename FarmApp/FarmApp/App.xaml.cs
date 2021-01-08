@@ -35,6 +35,7 @@ namespace FarmApp
 
 			containerRegistry.Register<IGoogleMapsService, GoogleMapsService>();
 			containerRegistry.RegisterForNavigation<LogsPage, LogsPageViewModel>();
+			containerRegistry.RegisterForNavigation<InventoryPage, InventoryPageViewModel>();
 		}
 	}
 }

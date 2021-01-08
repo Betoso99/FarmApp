@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FarmApp.Views.InventoryPage"
+             Title="{Binding Title}">
+    <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" ItemsSource="{Binding Products}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="{Binding ProductName}" Grid.Column="0"/>
+                    <Grid Grid.Column="1" Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label Text="Quantity:" Grid.Column="0" Grid.Row="0"/>
+                        <Label Text="{Binding Quantity}" Grid.Row="0" Grid.Column="1"/>
+                        <Label Text="RD$:" Grid.Row="1" Grid.Column="0"/>
+                        <Label Text="{Binding Price}" Grid.Row="1" Grid.Column="1"/>
+                        
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
