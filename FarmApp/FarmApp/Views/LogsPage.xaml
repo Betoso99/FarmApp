@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:prism="http://prismlibrary.com"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            x:Class="FarmApp.Views.LogsPage"
+            NavigationPage.HasNavigationBar="False">
+
+    <ContentPage Title="Login" BackgroundImageSource="Wallpaper.jpg" IconImageSource="LogIn.png">
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Image Source="LogoFarmApp.png" VerticalOptions="Start" Margin="50,0,50,0"/>
+            <ScrollView>
+                <StackLayout Padding="35,0">
+                    <Entry x:Name="User" Placeholder="User or Example@gmail.com" 
+                           ClearButtonVisibility="WhileEditing" 
+                           PlaceholderColor="Gray" 
+                           TextColor="Black" 
+                           Text="{Binding User.Name, Mode=TwoWay}"/>
+                    <Entry x:Name="Pass" Placeholder="Password" IsPassword="True" 
+                           ClearButtonVisibility="WhileEditing" 
+                           PlaceholderColor="Gray" 
+                           TextColor="Black" 
+                           Keyboard="Numeric" 
+                           Text="{Binding User.Pass, Mode=TwoWay}"/>
+                    <Button x:Name="Login" Text="LogIn" 
+                            TextColor="Black" 
+                            WidthRequest="100" 
+                            BackgroundColor="Cyan"
+                            Command="{Binding LogInCommand}" CornerRadius="200"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Wanna create an account?" TextColor="Black" Margin="0,15,0,0"/>
+                        <Button x:Name="Singup" Text="Singup"
+                                ScaleY="0.8"
+                                HorizontalOptions="EndAndExpand"
+                                BackgroundColor="Cyan"
+                                TextColor="Black"
+                                CornerRadius="200"/>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage x:Name="SignUpView" Title="SignUp" BackgroundImageSource="Wallpaper.jpg" IconImageSource="SignUp.png">
+        <StackLayout>
+            <Image Source="LogoFarmApp.png" VerticalOptions="Start" Margin="50,50,50,0"/>
+            <ScrollView>
+                <StackLayout Padding="35,0">
+                    <Entry x:Name="Name" Placeholder="Name" 
+                           ClearButtonVisibility="WhileEditing" 
+                           PlaceholderColor="Gray" 
+                           TextColor="Black" 
+                           Text="{Binding User.Name, Mode=TwoWay}"/>
+                    <Entry x:Name="Email" Placeholder="Example@gmail.com" 
+                           ClearButtonVisibility="WhileEditing" 
+                           PlaceholderColor="Gray" 
+                           TextColor="Black" 
+                           Text="{Binding User.Email, Mode=TwoWay}"/>
+                    <Entry x:Name="Pass1" Placeholder="Password" IsPassword="True" 
+                           ClearButtonVisibility="WhileEditing" 
+                           PlaceholderColor="Gray" 
+                           TextColor="Black"
+                           Keyboard="Numeric"
+                           Text="{Binding User.Pass1, Mode=TwoWay}"/>
+                    <Entry x:Name="Pass2" Placeholder="Confirm Password" IsPassword="True" 
+                           ClearButtonVisibility="WhileEditing" 
+                           PlaceholderColor="Gray" 
+                           TextColor="Black"
+                           Keyboard="Numeric" 
+                           Text="{Binding User.Pass2, Mode=TwoWay}"/>
+                    <Button x:Name="Signup" Text="Singup"
+                           BackgroundColor="Cyan"
+                           TextColor="Black"
+                           Command="{Binding SingUpCommand}" CornerRadius="200"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
