@@ -21,7 +21,7 @@ namespace FarmApp
 		{
 			InitializeComponent();
 
-			await NavigationService.NavigateAsync($"NavigationPage/{Constants.HomePage}");
+			await NavigationService.NavigateAsync($"NavigationPage/{Constants.LogsPage}");
 		}
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -29,12 +29,12 @@ namespace FarmApp
 			containerRegistry.RegisterForNavigation<NavigationPage>();
 			containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>(Constants.HomePage);
 			containerRegistry.RegisterForNavigation<StorePage, StorePageViewModel>(Constants.StorePage);
-            containerRegistry.RegisterForNavigation<DirectionPage, DirectionPageViewModel>(Constants.DirectionPage);
             containerRegistry.RegisterForNavigation<InfoPage, InfoPageViewModel>(Constants.InfoPage);
             containerRegistry.RegisterForNavigation<OptionsPage, OpinionsPageViewModel>(Constants.OpinionsPage);
             containerRegistry.RegisterForNavigation<SharePage, SharePageViewModel>(Constants.SharePage);
 
 			containerRegistry.Register<IGoogleMapsService, GoogleMapsService>();
-        }
+			containerRegistry.RegisterForNavigation<LogsPage, LogsPageViewModel>();
+		}
 	}
 }

@@ -38,7 +38,7 @@ namespace FarmApp.ViewModels
 
         public String GetLink()
         {
-            Link = "Hello World";
+            Link = "https://goo.gl/maps/qwHQ4w9StkBSbvpQ6";
             return Link;
         }
     }
