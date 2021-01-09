@@ -6,6 +6,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.HomePage"
              NavigationPage.HasNavigationBar="False">
+    
     <AbsoluteLayout Margin="0">
         
         <controls:CustomMap  AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional"
@@ -27,7 +28,7 @@
 
         <Frame  BackgroundColor="White" Padding="0" Margin="0" IsClippedToBounds="True" CornerRadius="150"
             AbsoluteLayout.LayoutBounds="0.05,0.97,40,40" AbsoluteLayout.LayoutFlags="PositionProportional">
-            <ImageButton Source="location.png"  Margin="0" Padding="10"  BackgroundColor="Transparent" CornerRadius="150" Aspect="AspectFill"
+            <ImageButton Source="{Binding LocationImage}"  Margin="0" Padding="10"  BackgroundColor="Transparent" CornerRadius="150" Aspect="AspectFill"
                            Command="{Binding CurrentLocationCommand}"/>
         </Frame>
 

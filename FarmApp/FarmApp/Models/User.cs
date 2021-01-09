@@ -7,9 +7,7 @@ namespace FarmApp.Models
 {
 	public class User
 	{
-		[JsonProperty("Name")]
 		public string Name { get; set; }
-		[JsonProperty("Email")]
 		public string Email { get; set; }
 		[JsonProperty("Password")]
 		public string Pass { get; set; }

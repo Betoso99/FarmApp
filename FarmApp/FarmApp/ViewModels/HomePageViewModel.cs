@@ -37,6 +37,8 @@ namespace FarmApp.ViewModels
         public ObservableCollection<Pin> Pins { get; set; }
         #endregion
 
+        public string LocationImage => "location.png";
+
         public string OriginLongitude { get; set; }
         public string OriginLatitude { get; set; }
         public string DestinationLongitude { get; set; }
@@ -50,6 +52,7 @@ namespace FarmApp.ViewModels
         const string NoRouteAlertDescription = "No route found";
         #endregion
 
+        
         public HomePageViewModel(INavigationService navigationService, IPageDialogService dialogService, IGoogleMapsService googleMapsService) :
             base(navigationService)
         {
