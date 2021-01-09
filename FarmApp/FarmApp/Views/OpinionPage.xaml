@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="FarmApp.Views.OptionsPage"
+             x:Class="FarmApp.Views.OpinionsPage"
              Title="{Binding Title}">
     <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" ItemsSource="{Binding Opinions}">
         <ListView.ItemTemplate>

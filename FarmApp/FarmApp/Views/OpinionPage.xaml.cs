@@ -2,9 +2,9 @@
 
 namespace FarmApp.Views
 {
-    public partial class OptionsPage : ContentPage
+    public partial class OpinionsPage : ContentPage
     {
-        public OptionsPage()
+        public OpinionsPage()
         {
             InitializeComponent();
         }
