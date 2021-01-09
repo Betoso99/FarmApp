@@ -9,16 +9,21 @@ namespace FarmApp.ViewModels
 {
     public class InfoPageViewModel : ViewModelBase
     {
-        public INavigationService _navigationService { get; set; }
+
+        private readonly INavigationService _navigationService;
+
+        // TODO: Need to get this info from a model/DTO (probably called PharmacyInfo) 
         public string Direction { get; set; }
         public string Schedule { get; set; }
         public string Phone { get; set; }
         public string Web { get; set; }
 
+        private const string InfoPageTitle = "Information";
+
         public InfoPageViewModel(INavigationService navigationService) :
             base(navigationService)
         {
-            Title = "Information";
+            Title = InfoPageTitle;
             _navigationService = navigationService;
         }
     }

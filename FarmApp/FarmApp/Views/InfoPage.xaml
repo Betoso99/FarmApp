@@ -5,6 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.InfoPage"
              Title="{Binding Title}">
+    
     <Grid VerticalOptions="Center" HorizontalOptions="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

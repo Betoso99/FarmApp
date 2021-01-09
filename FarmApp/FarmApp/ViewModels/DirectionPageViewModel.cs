@@ -9,11 +9,15 @@ namespace FarmApp.ViewModels
 {
     public class DirectionPageViewModel : ViewModelBase
     {
-        public INavigationService _navigationService { get; set; }
+
+        private readonly INavigationService _navigationService;
+
+        private const string InfoPageTitle = "Information";
+ 
         public DirectionPageViewModel(INavigationService navigationService) :
             base(navigationService)
         {
-            Title = "Directions";
+            Title = InfoPageTitle;
             _navigationService = navigationService;
         }
     }

@@ -31,7 +31,7 @@ namespace FarmApp
 			containerRegistry.RegisterForNavigation<StorePage, StorePageViewModel>(Constants.StorePage);
             containerRegistry.RegisterForNavigation<DirectionPage, DirectionPageViewModel>(Constants.DirectionPage);
             containerRegistry.RegisterForNavigation<InfoPage, InfoPageViewModel>(Constants.InfoPage);
-            containerRegistry.RegisterForNavigation<OptionsPage, OpinionsPageViewModel>(Constants.OpinionsPage);
+            containerRegistry.RegisterForNavigation<OpinionsPage, OpinionPageViewModel>(Constants.OpinionsPage);
             containerRegistry.RegisterForNavigation<SharePage, SharePageViewModel>(Constants.SharePage);
 
 			containerRegistry.Register<IGoogleMapsService, GoogleMapsService>();

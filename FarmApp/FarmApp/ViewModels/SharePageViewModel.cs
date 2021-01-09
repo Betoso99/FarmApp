@@ -14,15 +14,26 @@ namespace FarmApp.ViewModels
 
     public class SharePageViewModel : ViewModelBase
     {
-        public INavigationService _navigationService { get; set; }
-        public IPageDialogService _dialogService { get; set; }
+
+        #region Services
+        private readonly INavigationService _navigationService;
+        private readonly IPageDialogService _dialogService;
+        #endregion
+
         public DelegateCommand CopyCommand { get; set; }
+
+        #region Constants
+        private const string SharePageTitle = "Share";
+        private const string SuccessLinkHeader = "Done";
+        private const string SuccessLinkDescription = "Your Link has been succesfully copied";
+        #endregion
+
         public string Link { get; set; }
 
         public SharePageViewModel(INavigationService navigationService, IPageDialogService dialogService) :
             base(navigationService)
         {
-            Title = "Share";
+            Title = SharePageTitle;
             _dialogService = dialogService;
             _navigationService = navigationService;
             Link = GetLink();
@@ -31,15 +42,17 @@ namespace FarmApp.ViewModels
         }
 
         async Task Copy()
-		{
+        {
             await Clipboard.SetTextAsync(Link);
-            await _dialogService.DisplayAlertAsync("Done", "Your Link has been succesfully copied", "OK"); ;
+            await _dialogService.DisplayAlertAsync(SuccessLinkHeader, SuccessLinkDescription, Constants.OkAlert);
         }
 
-        public String GetLink()
+        public string GetLink()
         {
+            // TODO: Create logic to get actual link location from google maps or some other service
             Link = "Hello World";
             return Link;
         }
     }
+
 }

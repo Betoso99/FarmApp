@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\OpiniosPage.xaml.cs">
-      <DependentUpon>OpiniosPage.xaml</DependentUpon>
+    <Compile Update="Views\OpinionPage.xaml.cs">
+      <DependentUpon>OpinionPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -31,7 +31,7 @@
     <EmbeddedResource Update="Views\InfoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\OpiniosPage.xaml">
+    <EmbeddedResource Update="Views\OpinionPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SharePage.xaml">
