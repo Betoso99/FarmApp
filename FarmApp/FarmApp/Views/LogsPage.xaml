@@ -3,26 +3,23 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:prism="http://prismlibrary.com"
             prism:ViewModelLocator.AutowireViewModel="True"
-            x:Class="FarmApp.Views.LogsPage">
+            x:Class="FarmApp.Views.LogsPage"
+            Title="{Binding Title}">
 
-    <ContentPage Title="Login" BackgroundImageSource="Wallpaper.jpg" IconImageSource="LogIn.png">
+    <ContentPage Title="{Binding LoginTitle}" BackgroundImageSource="{Binding LogsBackgroundImage}" IconImageSource="{Binding LoginIconImage}">
         <StackLayout VerticalOptions="CenterAndExpand">
             <Image Source="LogoFarmApp.png" VerticalOptions="Start" Margin="50,0,50,0"/>
             <ScrollView>
                 <StackLayout Padding="35,0">
                     <Entry x:Name="User" Placeholder="User or Example@gmail.com" 
-                           ClearButtonVisibility="WhileEditing" 
-                           PlaceholderColor="Gray" 
-                           TextColor="Black" 
+                           Style="{StaticResource EntryLabelStyle}"
                            Text="{Binding User.Name, Mode=TwoWay}"/>
                     <Entry x:Name="Pass" Placeholder="Password" IsPassword="True" 
-                           ClearButtonVisibility="WhileEditing" 
-                           PlaceholderColor="Gray" 
-                           TextColor="Black" 
+                           Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric" 
                            Text="{Binding User.Pass, Mode=TwoWay}"/>
                     <Button x:Name="Login" Text="LogIn" 
-                            TextColor="Black" 
+                            TextColor="{StaticResource ButtonTextColor}" 
                             WidthRequest="100" 
                             BackgroundColor="Cyan"
                             Command="{Binding LogInCommand}" CornerRadius="200"/>
@@ -32,7 +29,7 @@
                                 ScaleY="0.8"
                                 HorizontalOptions="EndAndExpand"
                                 BackgroundColor="Cyan"
-                                TextColor="Black"
+                                TextColor="{StaticResource ButtonTextColor}"
                                 CornerRadius="200"/>
                     </StackLayout>
                 </StackLayout>
@@ -40,36 +37,28 @@
         </StackLayout>
     </ContentPage>
 
-    <ContentPage x:Name="SignUpView" Title="SignUp" BackgroundImageSource="Wallpaper.jpg" IconImageSource="SignUp.png">
+    <ContentPage x:Name="SignUpView" Title="{Binding SignUpTitle}" BackgroundImageSource="{Binding LogsBackgroundImage}" IconImageSource="{Binding LoginIconImage}">
         <StackLayout>
             <Image Source="LogoFarmApp.png" VerticalOptions="Start" Margin="50,50,50,0"/>
             <ScrollView>
                 <StackLayout Padding="35,0">
                     <Entry x:Name="Name" Placeholder="Name" 
-                           ClearButtonVisibility="WhileEditing" 
-                           PlaceholderColor="Gray" 
-                           TextColor="Black" 
+                           Style="{StaticResource EntryLabelStyle}"
                            Text="{Binding User.Name, Mode=TwoWay}"/>
                     <Entry x:Name="Email" Placeholder="Example@gmail.com" 
-                           ClearButtonVisibility="WhileEditing" 
-                           PlaceholderColor="Gray" 
-                           TextColor="Black" 
+                           Style="{StaticResource EntryLabelStyle}"
                            Text="{Binding User.Email, Mode=TwoWay}"/>
                     <Entry x:Name="Pass1" Placeholder="Password" IsPassword="True" 
-                           ClearButtonVisibility="WhileEditing" 
-                           PlaceholderColor="Gray" 
-                           TextColor="Black"
+                           Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric"
                            Text="{Binding User.Pass1, Mode=TwoWay}"/>
                     <Entry x:Name="Pass2" Placeholder="Confirm Password" IsPassword="True" 
-                           ClearButtonVisibility="WhileEditing" 
-                           PlaceholderColor="Gray" 
-                           TextColor="Black"
+                           Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric" 
                            Text="{Binding User.Pass2, Mode=TwoWay}"/>
                     <Button x:Name="Signup" Text="Singup"
                            BackgroundColor="Cyan"
-                           TextColor="Black"
+                           TextColor="{StaticResource ButtonTextColor}"
                            Command="{Binding SingUpCommand}" CornerRadius="200"/>
                 </StackLayout>
             </ScrollView>

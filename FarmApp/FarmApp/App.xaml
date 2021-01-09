@@ -3,5 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms" 
              x:Class="FarmApp.App">
-    
+    <prism:PrismApplication.Resources>
+        
+        <ResourceDictionary>
+
+            <Color x:Key="ButtonTextColor">Black</Color>
+            <Color x:Key="EntryTextColor">Black</Color>
+            <Color x:Key="PlaceHolderColor">Gray</Color>
+            
+            <Style x:Key="EntryLabelStyle" TargetType="Entry">
+                <Setter Property="ClearButtonVisibility" Value="WhileEditing" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource PlaceHolderColor}" />
+                <Setter Property="TextColor" Value="{StaticResource EntryTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </prism:PrismApplication.Resources>
+
 </prism:PrismApplication>

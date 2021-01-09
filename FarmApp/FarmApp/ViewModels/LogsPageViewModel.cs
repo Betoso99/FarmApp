@@ -11,59 +11,98 @@ using Xamarin.Forms;
 
 namespace FarmApp.ViewModels
 {
-	public class LogsPageViewModel : ViewModelBase
-	{
-		public INavigationService _navigationService { get; set; }
-		public IPageDialogService _pageDialogService { get; set; }
-		public User User { get; set; }
+    public class LogsPageViewModel : ViewModelBase
+    {
 
-		public ICommand LogInCommand { get; set; }
-		public ICommand SingUpCommand { get; set; }
+        public INavigationService _navigationService { get; set; }
+        public IPageDialogService _pageDialogService { get; set; }
+        public User User { get; set; }
 
-		public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) :
-			base(navigationService)
-		{
-			Title = "Information";
-			_navigationService = navigationService;
-			_pageDialogService = pageDialogService;
-			
+        public ICommand LogInCommand { get; set; }
+        public ICommand SingUpCommand { get; set; }
 
-			User = new User();
-			LogInCommand = new Command(async () => await OnLogin());
-			SingUpCommand = new Command(async () => await OnSingUp() );
-		}
+        private const string LogsPageTitle = "Login/Sign Up";
+
+        private const string InvalidFieldsAlertTitle = "Invalid fields";
+        private const string InvalidFieldsAlertDescription = "Fields cannot be empty";
+
+        private const string InvalidPasswordAlertTitle = "Invalid password";
+        private const string InvalidPasswordAlertDescription = "Passwords cannot be the same";
+
+        private const string SuccessLoginAlertTitle = "Welcome Back";
+        private const string SuccessLoginAlertDescription = "Welcome again";
+
+        private const string SuccessSignupAlertTitle = "Welcome";
+        private const string SuccessSignupAlertDescription = "Welcome to FarmApp";
+
+        public string LogsBackgroundImage => "Wallpaper.jpg";
+
+        public string LoginTitle => "Login";
+        public string LoginIconImage => "LogIn.png";
+
+        public string SignUpTitle => "Sign Up";
+        public string SignUpIconImage => "SignUp.png";
+
+
+
+
+        public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) :
+            base(navigationService)
+        {
+            Title = LogsPageTitle;
+            _navigationService = navigationService;
+            _pageDialogService = pageDialogService;
+
+
+            User = new User();
+            LogInCommand = new Command(async () => await OnLogin());
+            SingUpCommand = new Command(async () => await OnSingUp());
+        }
 
         public async Task OnLogin()
         {
-			if (string.IsNullOrEmpty(User.Name) | string.IsNullOrEmpty(User.Pass))
-			{
-				await _pageDialogService.DisplayAlertAsync("Error", "Something is missing", "Ok");
-			}
-			else
-			{
-				await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
-				await _pageDialogService.DisplayAlertAsync("Welcome", $"Welcome again {User.Name}", "Ok");
-			}
-		}
+            if (string.IsNullOrEmpty(User.Name) | string.IsNullOrEmpty(User.Pass))
+            {
+                await App.Current.MainPage.DisplayAlert(InvalidFieldsAlertTitle,
+                                                        InvalidFieldsAlertDescription,
+                                                        Constants.OkAlert);
+            }
+            else
+            {
+                string LoginAlertDescription = $"{SuccessLoginAlertDescription}, {User.Name}";
 
-		public async Task OnSingUp()
+                await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
+                await _pageDialogService.DisplayAlertAsync(SuccessLoginAlertTitle,
+                                                           LoginAlertDescription,
+                                                           Constants.OkAlert);
+            }
+        }
+
+        public async Task OnSingUp()
         {
-			if (string.IsNullOrEmpty(User.Name) |
-				string.IsNullOrEmpty(User.Email) |
-				string.IsNullOrEmpty(User.Pass1) |
-				string.IsNullOrEmpty(User.Pass2))
-			{
-				await App.Current.MainPage.DisplayAlert("Error", "Something is missing", "Ok");
-			}
-			else if (User.Pass1 != User.Pass2)
-			{
-				await App.Current.MainPage.DisplayAlert("Error", "The Passwords are not the same", "Ok");
-			}
-			else
-			{
-				await App.Current.MainPage.Navigation.PushModalAsync(new HomePage());
-				await App.Current.MainPage.DisplayAlert("Welcome", $"Welcome again {User.Name}", "Ok");
-			}
-		}
-	}
+            if (string.IsNullOrEmpty(User.Name) | string.IsNullOrEmpty(User.Email) |
+                string.IsNullOrEmpty(User.Pass) | string.IsNullOrEmpty(User.Pass2))
+            {
+
+                await App.Current.MainPage.DisplayAlert(InvalidFieldsAlertTitle,
+                                                        InvalidFieldsAlertDescription,
+                                                        Constants.OkAlert);
+            }
+            else if (User.Pass != User.Pass2)
+            {
+                await App.Current.MainPage.DisplayAlert(InvalidPasswordAlertTitle,
+                                                        InvalidPasswordAlertDescription,
+                                                        Constants.OkAlert);
+            }
+            else
+            {
+                string SignUpAlertDescription = $"{SuccessSignupAlertDescription}, {User.Name}";
+
+                await App.Current.MainPage.Navigation.PushModalAsync(new HomePage());
+                await App.Current.MainPage.DisplayAlert(SuccessSignupAlertTitle,
+                                                        SignUpAlertDescription,
+                                                        Constants.OkAlert);
+            }
+        }
+    }
 }
