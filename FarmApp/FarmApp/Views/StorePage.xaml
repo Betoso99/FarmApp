@@ -10,5 +10,6 @@
         <views:InfoPage/>
         <views:OpinionsPage/>
         <views:SharePage/>
+        <views:InventoryPage/>
     </TabbedPage.Children>
 </TabbedPage>

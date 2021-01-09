@@ -50,7 +50,9 @@ namespace FarmApp.ViewModels
         public string GetLink()
         {
             // TODO: Create logic to get actual link location from google maps or some other service
-            Link = "Hello World";
+
+            Link = "https://goo.gl/maps/qwHQ4w9StkBSbvpQ6";
+
             return Link;
         }
     }

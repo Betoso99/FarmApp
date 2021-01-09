@@ -8,13 +8,17 @@ namespace FarmApp
     {
         public const string GoogleMapsApiKey = "API_KEY_HERE";
 
+<<<<<<< HEAD
         public const string OkAlert = "Ok";
 
+=======
+        public const string NavigationPage = "NavigationPage";
+>>>>>>> main
         public const string HomePage = "Home";
         public const string StorePage = "Store";
-        public const string DirectionPage = "StoreDirections";
         public const string InfoPage = "StoreInfo";
         public const string OpinionsPage = "StoreOpinions";
         public const string SharePage = "StoreShare";
+        public const string LogsPage = "LogsPage";
     }
 }
