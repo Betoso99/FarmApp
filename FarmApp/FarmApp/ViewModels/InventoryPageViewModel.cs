@@ -12,7 +12,7 @@ namespace FarmApp.ViewModels
 	public class InventoryPageViewModel : ViewModelBase
 	{
 		public INavigationService _navigationService { get; set; }
-		public ObservableCollection<Products> PharmacyProducts { get; set; }
+		public ObservableCollection<Product> PharmacyProducts { get; set; }
 
 		public InventoryPageViewModel(INavigationService navigationService) :
 			base(navigationService)

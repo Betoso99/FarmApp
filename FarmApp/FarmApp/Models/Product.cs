@@ -5,13 +5,18 @@ using System.Text;
 
 namespace FarmApp.Models
 {
-	public class Products
+	public class Product
 	{
-		[JsonProperty("ProductName")]
-		public string ProductName { get; set; }
-		[JsonProperty("Quantity")]
+		[JsonProperty("id")]
+		public int Id { get; set; }
+
+		[JsonProperty("name")]
+		public string Name { get; set; }
+		
+		[JsonProperty("quantity")]
 		public string Quantity { get; set; }
-		[JsonProperty("Price")]
+		
+		[JsonProperty("price")]
 		public string Price { get; set; }
 	}
 }
