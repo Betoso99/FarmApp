@@ -26,16 +26,22 @@ namespace FarmApp
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
 		{
+			// Navigation
+
 			containerRegistry.RegisterForNavigation<NavigationPage>(Constants.NavigationPage);
 			containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>(Constants.HomePage);
 			containerRegistry.RegisterForNavigation<StorePage, StorePageViewModel>(Constants.StorePage);
             containerRegistry.RegisterForNavigation<InfoPage, InfoPageViewModel>(Constants.InfoPage);
             containerRegistry.RegisterForNavigation<OpinionsPage, OpinionPageViewModel>(Constants.OpinionsPage);
             containerRegistry.RegisterForNavigation<SharePage, SharePageViewModel>(Constants.SharePage);
-
-			containerRegistry.Register<IGoogleMapsService, GoogleMapsService>();
 			containerRegistry.RegisterForNavigation<LogsPage, LogsPageViewModel>();
 			containerRegistry.RegisterForNavigation<InventoryPage, InventoryPageViewModel>();
+
+			// Services
+
+			containerRegistry.Register<IGoogleMapsService, GoogleMapsService>();
+			containerRegistry.Register<IFarmAppService, FarmAppService>();
+			
 		}
 	}
 }

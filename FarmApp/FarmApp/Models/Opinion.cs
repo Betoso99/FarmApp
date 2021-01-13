@@ -4,7 +4,7 @@ namespace FarmApp.Models
 {
     public class Opinion
 	{
-		[JsonProperty("User_Name")]
+		[JsonProperty("userName")]
 		public string Name { get; set; }
 		public string Description { get; set; }
 	}

@@ -14,12 +14,19 @@ namespace FarmApp.ViewModels
     public class LogsPageViewModel : ViewModelBase
     {
 
+        #region Services
+
         public INavigationService _navigationService { get; set; }
         public IPageDialogService _pageDialogService { get; set; }
-        public User User { get; set; }
+        #endregion
+
+        #region Commands
 
         public ICommand LogInCommand { get; set; }
         public ICommand SingUpCommand { get; set; }
+        #endregion
+
+        #region Constants
 
         private const string LogsPageTitle = "Login/Sign Up";
 
@@ -34,17 +41,23 @@ namespace FarmApp.ViewModels
 
         private const string SuccessSignupAlertTitle = "Welcome";
         private const string SuccessSignupAlertDescription = "Welcome to FarmApp";
+        #endregion
+
+        #region Models
+
+        public User User { get; set; }
+        public UserPerson UserPerson { get; set; }
+        public string ConfirmPassword { get; set; }
+        #endregion
 
         public string LogsBackgroundImage => "Wallpaper.jpg";
-
         public string LoginTitle => "Login";
         public string LoginIconImage => "LogIn.png";
-
         public string SignUpTitle => "Sign Up";
         public string SignUpIconImage => "SignUp.png";
 
 
-
+        
 
         public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) :
             base(navigationService)
@@ -55,13 +68,14 @@ namespace FarmApp.ViewModels
 
 
             User = new User();
+            UserPerson = new UserPerson();
             LogInCommand = new Command(async () => await OnLogin());
             SingUpCommand = new Command(async () => await OnSingUp());
         }
 
         public async Task OnLogin()
         {
-            if (string.IsNullOrEmpty(User.Name) | string.IsNullOrEmpty(User.Pass))
+            if (string.IsNullOrEmpty(User.UserName) | string.IsNullOrEmpty(User.Password))
             {
                 await App.Current.MainPage.DisplayAlert(InvalidFieldsAlertTitle,
                                                         InvalidFieldsAlertDescription,
@@ -69,7 +83,7 @@ namespace FarmApp.ViewModels
             }
             else
             {
-                string LoginAlertDescription = $"{SuccessLoginAlertDescription}, {User.Name}";
+                string LoginAlertDescription = $"{SuccessLoginAlertDescription}, {User.UserName}";
 
                 await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
                 await _pageDialogService.DisplayAlertAsync(SuccessLoginAlertTitle,
@@ -80,15 +94,15 @@ namespace FarmApp.ViewModels
 
         public async Task OnSingUp()
         {
-            if (string.IsNullOrEmpty(User.Name) | string.IsNullOrEmpty(User.Email) |
-                string.IsNullOrEmpty(User.Pass) | string.IsNullOrEmpty(User.Pass2))
+            if (string.IsNullOrEmpty(UserPerson.FirstName) | string.IsNullOrEmpty(UserPerson.LastName) |
+                string.IsNullOrEmpty(UserPerson.Password) | string.IsNullOrEmpty(ConfirmPassword))
             {
 
                 await App.Current.MainPage.DisplayAlert(InvalidFieldsAlertTitle,
                                                         InvalidFieldsAlertDescription,
                                                         Constants.OkAlert);
             }
-            else if (User.Pass != User.Pass2)
+            else if (UserPerson.Password != ConfirmPassword)
             {
                 await App.Current.MainPage.DisplayAlert(InvalidPasswordAlertTitle,
                                                         InvalidPasswordAlertDescription,
@@ -96,7 +110,7 @@ namespace FarmApp.ViewModels
             }
             else
             {
-                string SignUpAlertDescription = $"{SuccessSignupAlertDescription}, {User.Name}";
+                string SignUpAlertDescription = $"{SuccessSignupAlertDescription}, {UserPerson.FirstName}";
 
                 await App.Current.MainPage.Navigation.PushModalAsync(new HomePage());
                 await App.Current.MainPage.DisplayAlert(SuccessSignupAlertTitle,

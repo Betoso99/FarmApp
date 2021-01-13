@@ -11,13 +11,13 @@
             <Image Source="LogoFarmApp.png" VerticalOptions="Start" Margin="50,0,50,0"/>
             <ScrollView>
                 <StackLayout Padding="35,0">
-                    <Entry x:Name="User" Placeholder="User or Example@gmail.com" 
+                    <Entry x:Name="User" Placeholder="Username" 
                            Style="{StaticResource EntryLabelStyle}"
-                           Text="{Binding User.Name, Mode=TwoWay}"/>
+                           Text="{Binding User.UserName, Mode=TwoWay}"/>
                     <Entry x:Name="Pass" Placeholder="Password" IsPassword="True" 
                            Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric" 
-                           Text="{Binding User.Pass, Mode=TwoWay}"/>
+                           Text="{Binding User.Password, Mode=TwoWay}"/>
                     <Button x:Name="Login" Text="LogIn" 
                             TextColor="{StaticResource ButtonTextColor}" 
                             WidthRequest="100" 
@@ -41,22 +41,28 @@
         <StackLayout>
             <Image Source="LogoFarmApp.png" VerticalOptions="Start" Margin="50,50,50,0"/>
             <ScrollView>
-                <StackLayout Padding="35,0">
-                    <Entry x:Name="Name" Placeholder="Name" 
+                <StackLayout Padding="30,0">
+                    <Entry x:Name="fName" Placeholder="First Name" 
                            Style="{StaticResource EntryLabelStyle}"
-                           Text="{Binding User.Name, Mode=TwoWay}"/>
+                           Text="{Binding UserPerson.FirstName, Mode=TwoWay}"/>
+                    <Entry x:Name="lName" Placeholder="Last Name" 
+                           Style="{StaticResource EntryLabelStyle}"
+                           Text="{Binding UserPerson.LastName, Mode=TwoWay}"/>
                     <Entry x:Name="Email" Placeholder="Example@gmail.com" 
                            Style="{StaticResource EntryLabelStyle}"
-                           Text="{Binding User.Email, Mode=TwoWay}"/>
-                    <Entry x:Name="Pass1" Placeholder="Password" IsPassword="True" 
+                           Text="{Binding UserPerson.EmailAddress, Mode=TwoWay}"/>
+                    <Entry x:Name="Username" Placeholder="Username" 
+                           Style="{StaticResource EntryLabelStyle}"
+                           Text="{Binding UserPerson.UserName, Mode=TwoWay}"/>
+                    <Entry x:Name="Pass" Placeholder="Password" IsPassword="True" 
                            Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric"
-                           Text="{Binding User.Pass1, Mode=TwoWay}"/>
+                           Text="{Binding UserPerson.Password, Mode=TwoWay}"/>
                     <Entry x:Name="Pass2" Placeholder="Confirm Password" IsPassword="True" 
                            Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric" 
-                           Text="{Binding User.Pass2, Mode=TwoWay}"/>
-                    <Button x:Name="Signup" Text="Singup"
+                           Text="{Binding ConfirmPassword, Mode=TwoWay}"/>
+                    <Button x:Name="Signup" Text="Sign Up"
                            BackgroundColor="Cyan"
                            TextColor="{StaticResource ButtonTextColor}"
                            Command="{Binding SingUpCommand}" CornerRadius="200"/>
