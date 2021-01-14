@@ -5,8 +5,8 @@ using System.Text;
 
 namespace FarmApp.Models
 {
-	public class Product
-	{
+    public class ProductPharmacy
+    {
 		[JsonProperty("id")]
 		public int Id { get; set; }
 
@@ -21,5 +21,12 @@ namespace FarmApp.Models
 
 		[JsonProperty("administrationVia")]
 		public string AdministrationVia { get; set; }
+
+		[JsonProperty("quantity")]
+		public string Quantity { get; set; }
+
+		[JsonProperty("price")]
+		public string Price { get; set; }
+
 	}
 }

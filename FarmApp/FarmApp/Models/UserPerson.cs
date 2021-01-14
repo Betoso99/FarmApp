@@ -16,8 +16,5 @@ namespace FarmApp.Models
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         public string HomeAddress { get; set; }
-        public int IdDocumentType { get; set; }
-        public string DocumentNumber { get; set; }
-        public int IdTown { get; set; }
     }
 }
