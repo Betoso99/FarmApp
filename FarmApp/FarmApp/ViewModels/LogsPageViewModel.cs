@@ -43,6 +43,7 @@ namespace FarmApp.ViewModels
 
         private const string SuccessSignupAlertTitle = "Welcome";
         private const string SuccessSignupAlertDescription = "Welcome to FarmApp";
+//<<<<<<< dev/ariel
 
         private const string FailSignupAlertTitle = "Sign Up failed";
         private const string FailSignupAlertDescription = "Seems like this email already exists from another acount";
@@ -50,6 +51,10 @@ namespace FarmApp.ViewModels
         private const string InvalidLoginAlertTitle = "Login Error";
         private const string InvalidLoginAlertDescription = "Invalid Username / Password";
 
+//=======
+        private TypePicker selectedGender;
+        private CustomDatePicker selectedDate;
+//>>>>>>> main
         #endregion
 
         #region Models
@@ -57,6 +62,31 @@ namespace FarmApp.ViewModels
         public User User { get; set; }
         public UserPerson UserPerson { get; set; }
         public string ConfirmPassword { get; set; }
+        public List<TypePicker> Genders { get; set; }
+        public TypePicker SelectedGender
+        {
+            get { return selectedGender; }
+            set
+            {
+                selectedGender = value;
+                if (selectedGender != null)
+                {
+                    Gender();
+                }
+            }
+        }
+        public CustomDatePicker SelectedDate
+        {
+            get { return selectedDate; }
+            set
+            {
+                selectedDate = value;
+                if (selectedDate != null)
+                {
+                    Date();
+                }
+            }
+        }
         #endregion
 
         public string LogsBackgroundImage => "Wallpaper.jpg";
@@ -77,7 +107,7 @@ namespace FarmApp.ViewModels
             _pageDialogService = pageDialogService;
             _farmAppApiService = farmAppService;
 
-
+            PickerGender();
             User = new User();
             UserPerson = new UserPerson();
             LogInCommand = new Command(async () => await OnLogin());
@@ -116,6 +146,23 @@ namespace FarmApp.ViewModels
                     
              
             }
+        }
+
+        public void PickerGender()
+        {
+            Genders = new List<TypePicker>() { };
+            Genders.Add(new TypePicker { Gender = "Female" });
+            Genders.Add(new TypePicker { Gender = "Male" });
+        }
+
+        public void Gender()
+        {
+            UserPerson.Gender = SelectedGender.Gender[0].ToString();
+        }
+
+        public void Date()
+        {
+            UserPerson.BirthDate = SelectedDate.Date;
         }
 
         public async Task OnSingUp()

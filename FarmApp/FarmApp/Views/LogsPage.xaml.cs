@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using FarmApp.Models;
+using Xamarin.Forms;
 
 namespace FarmApp.Views
 {
