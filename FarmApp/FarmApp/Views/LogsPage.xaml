@@ -14,7 +14,7 @@
                     <Entry x:Name="User" Placeholder="Username" 
                            Style="{StaticResource EntryLabelStyle}"
                            Text="{Binding User.UserName, Mode=TwoWay}"/>
-                    <Entry x:Name="Pass" Placeholder="Password" IsPassword="True" 
+                    <Entry x:Name="LoginPassword" Placeholder="Password" IsPassword="True" 
                            Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric" 
                            Text="{Binding User.Password, Mode=TwoWay}"/>
@@ -25,7 +25,7 @@
                             Command="{Binding LogInCommand}" CornerRadius="200"/>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Wanna create an account?" TextColor="Black" Margin="0,15,0,0"/>
-                        <Button x:Name="Singup" Text="Singup"
+                        <Button x:Name="Signup" Text="Signup"
                                 ScaleY="0.8"
                                 HorizontalOptions="EndAndExpand"
                                 BackgroundColor="Cyan"
@@ -54,11 +54,11 @@
                     <Entry x:Name="Username" Placeholder="Username" 
                            Style="{StaticResource EntryLabelStyle}"
                            Text="{Binding UserPerson.UserName, Mode=TwoWay}"/>
-                    <Entry x:Name="Registration_Pass" Placeholder="Password" IsPassword="True" 
+                    <Entry x:Name="RegistrationPassword" Placeholder="Password" IsPassword="True" 
                            Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric"
                            Text="{Binding UserPerson.Password, Mode=TwoWay}"/>
-                    <Entry x:Name="Pass2" Placeholder="Confirm Password" IsPassword="True" 
+                    <Entry x:Name="ConfirmPassword" Placeholder="Confirm Password" IsPassword="True" 
                            Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric" 
                            Text="{Binding ConfirmPassword, Mode=TwoWay}"/>
