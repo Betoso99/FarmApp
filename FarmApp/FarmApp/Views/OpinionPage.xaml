@@ -15,7 +15,7 @@
                     </Grid.RowDefinitions>
 
                     <Label Text="{Binding Name}" Grid.Row="0"/>
-                    <Label Text="{Binding Opinion}" Grid.Row="1"/>
+                    <Label Text="{Binding Description}" Grid.Row="1"/>
                 </Grid>
             </DataTemplate>
         </ListView.ItemTemplate>
