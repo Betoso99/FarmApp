@@ -53,6 +53,18 @@ namespace FarmApp.Services
         [Post("api/users/login")]
         Task<ApiResponse<User>> LoginUser([Body] User user);
         #endregion
+
+        #region Reviews
+
+        [Get("api/reviews")]
+        Task<ApiResponse<IList<Review>>> GetAllReviews();
+
+        [Get("api/reviews/{reviewId}")]
+        Task<ApiResponse<Review>> GetReview(int reviewId);
+
+        [Post("api/reviews")]
+        Task<ApiResponse<Review>> CreateReview(Review review);
+        #endregion
     }
 
 }

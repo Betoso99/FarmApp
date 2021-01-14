@@ -31,5 +31,12 @@ namespace FarmApp.Services
         Task<UserPerson> RegisterUserAsync(UserPerson userPerson);
         Task<User> LoginUserAsync(User user);
         #endregion
+
+        #region Reviews
+
+        Task<IList<Review>> GetAllReviewsAsync();
+        Task<Review> GetReviewAsync(int userId);
+        Task<Review> CreateReviewAsync(Review review);
+        #endregion
     }
 }

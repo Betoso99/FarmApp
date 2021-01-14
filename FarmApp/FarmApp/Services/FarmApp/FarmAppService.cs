@@ -189,5 +189,48 @@ namespace FarmApp.Services
             return null;
         }
         #endregion
+
+        #region Reviews
+
+        public async Task<IList<Review>> GetAllReviewsAsync()
+        {
+            var response = await farmAppApi.GetAllReviews();
+
+            if (response.IsSuccessStatusCode)
+            {
+                List<Review> reviews = (List<Review>)response.Content;
+
+                return reviews;
+            }
+
+            return null;
+        }
+
+        public async Task<Review> GetReviewAsync(int reviewId)
+        {
+            var response = await farmAppApi.GetReview(reviewId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                Review review = response.Content;
+
+                return review;
+            }
+
+            return null;
+        }
+
+        public async Task<Review> CreateReviewAsync(Review review)
+        {
+            var response = await farmAppApi.CreateReview(review);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return response.Content;
+            }
+
+            return null;
+        }
+        #endregion
     }
 }

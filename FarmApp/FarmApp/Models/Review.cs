@@ -2,10 +2,12 @@
 
 namespace FarmApp.Models
 {
-    public class Opinion
+    public class Review
 	{
-		[JsonProperty("userName")]
+		[JsonProperty("reviewName")]
 		public string Name { get; set; }
+
+		[JsonProperty("reviewDescription")]
 		public string Description { get; set; }
 	}
 }
