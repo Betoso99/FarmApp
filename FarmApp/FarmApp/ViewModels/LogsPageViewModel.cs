@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using FarmApp.Services;
 
 namespace FarmApp.ViewModels
 {
@@ -18,6 +19,7 @@ namespace FarmApp.ViewModels
 
         public INavigationService _navigationService { get; set; }
         public IPageDialogService _pageDialogService { get; set; }
+        private IFarmAppService _farmAppApiService;
         #endregion
 
         #region Commands
@@ -41,6 +43,13 @@ namespace FarmApp.ViewModels
 
         private const string SuccessSignupAlertTitle = "Welcome";
         private const string SuccessSignupAlertDescription = "Welcome to FarmApp";
+
+        private const string FailSignupAlertTitle = "Sign Up failed";
+        private const string FailSignupAlertDescription = "Seems like this email already exists from another acount";
+
+        private const string InvalidLoginAlertTitle = "Login Error";
+        private const string InvalidLoginAlertDescription = "Invalid Username / Password";
+
         #endregion
 
         #region Models
@@ -59,12 +68,14 @@ namespace FarmApp.ViewModels
 
         
 
-        public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) :
+        public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
+                                IFarmAppService farmAppService) :
             base(navigationService)
         {
             Title = LogsPageTitle;
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
+            _farmAppApiService = farmAppService;
 
 
             User = new User();
@@ -77,18 +88,33 @@ namespace FarmApp.ViewModels
         {
             if (string.IsNullOrEmpty(User.UserName) | string.IsNullOrEmpty(User.Password))
             {
-                await App.Current.MainPage.DisplayAlert(InvalidFieldsAlertTitle,
-                                                        InvalidFieldsAlertDescription,
-                                                        Constants.OkAlert);
+                await _pageDialogService.DisplayAlertAsync(
+                    InvalidFieldsAlertTitle, InvalidFieldsAlertDescription, Constants.OkAlert
+                );
             }
             else
             {
                 string LoginAlertDescription = $"{SuccessLoginAlertDescription}, {User.UserName}";
-
-                await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
-                await _pageDialogService.DisplayAlertAsync(SuccessLoginAlertTitle,
-                                                           LoginAlertDescription,
-                                                           Constants.OkAlert);
+               
+                // Agregando usuario a la BD, si devuelve null es porque hubo un error
+                var user = await _farmAppApiService.LoginUserAsync(User);
+                
+                if(user != null)
+                {
+                    await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
+                    
+                    await _pageDialogService.DisplayAlertAsync(
+                        SuccessLoginAlertTitle, LoginAlertDescription, Constants.OkAlert
+                    );
+                }
+                else
+                {
+                    await _pageDialogService.DisplayAlertAsync(
+                        InvalidLoginAlertTitle, InvalidLoginAlertDescription, Constants.OkAlert
+                    );
+                }
+                    
+             
             }
         }
 
@@ -98,24 +124,34 @@ namespace FarmApp.ViewModels
                 string.IsNullOrEmpty(UserPerson.Password) | string.IsNullOrEmpty(ConfirmPassword))
             {
 
-                await App.Current.MainPage.DisplayAlert(InvalidFieldsAlertTitle,
-                                                        InvalidFieldsAlertDescription,
-                                                        Constants.OkAlert);
+                await _pageDialogService.DisplayAlertAsync(
+                    InvalidFieldsAlertTitle, InvalidFieldsAlertDescription, Constants.OkAlert
+                );
             }
             else if (UserPerson.Password != ConfirmPassword)
             {
-                await App.Current.MainPage.DisplayAlert(InvalidPasswordAlertTitle,
-                                                        InvalidPasswordAlertDescription,
-                                                        Constants.OkAlert);
+                await _pageDialogService.DisplayAlertAsync(
+                    InvalidPasswordAlertTitle, InvalidPasswordAlertDescription, Constants.OkAlert
+                );
             }
             else
             {
                 string SignUpAlertDescription = $"{SuccessSignupAlertDescription}, {UserPerson.FirstName}";
 
-                await App.Current.MainPage.Navigation.PushModalAsync(new HomePage());
-                await App.Current.MainPage.DisplayAlert(SuccessSignupAlertTitle,
-                                                        SignUpAlertDescription,
-                                                        Constants.OkAlert);
+                var person = await _farmAppApiService.RegisterUserAsync(UserPerson);
+
+                if (person != null)
+                {
+                    await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
+                    await _pageDialogService.DisplayAlertAsync(
+                        SuccessSignupAlertTitle, SignUpAlertDescription, Constants.OkAlert
+                     );
+                }
+                else
+                    await _pageDialogService.DisplayAlertAsync(
+                        FailSignupAlertTitle, FailSignupAlertDescription, Constants.OkAlert
+                     );
+
             }
         }
     }
