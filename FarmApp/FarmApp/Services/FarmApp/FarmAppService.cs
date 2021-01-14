@@ -10,7 +10,7 @@ namespace FarmApp.Services
 {
     public class FarmAppService : IFarmAppService
     {
-        private const string ApiBaseAddress = "https://azurewebsites.farmAppApi.net";
+        private const string ApiBaseAddress = "https://farmappapi.azurewebsites.net/";
 
         private IFarmAppAPI farmAppApi = RestService.For<IFarmAppAPI>(ApiBaseAddress);
 
