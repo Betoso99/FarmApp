@@ -14,7 +14,7 @@ namespace FarmApp.ViewModels
 
         private readonly INavigationService _navigationService;
 
-        public ObservableCollection<Opinion> Opinions { get; set; }
+        public ObservableCollection<Review> Opinions { get; set; }
 
         private const string OpinionPageTitle = "Opinions";
 
