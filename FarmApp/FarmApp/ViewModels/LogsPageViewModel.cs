@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using FarmApp.Services;
+using Refit;
 
 namespace FarmApp.ViewModels
 {
@@ -19,7 +20,7 @@ namespace FarmApp.ViewModels
 
         public INavigationService _navigationService { get; set; }
         public IPageDialogService _pageDialogService { get; set; }
-        private IFarmAppService _farmAppApiService;
+        public IFarmAppService _farmAppApiService { get; set; }
         #endregion
 
         #region Commands
@@ -87,7 +88,7 @@ namespace FarmApp.ViewModels
                 }
             }
         }
-        #endregion
+        #endregion        
 
         public string LogsBackgroundImage => "Wallpaper.jpg";
         public string LoginTitle => "Login";
@@ -95,11 +96,10 @@ namespace FarmApp.ViewModels
         public string SignUpTitle => "Sign Up";
         public string SignUpIconImage => "SignUp.png";
 
-
+        
         
 
-        public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, 
-                                IFarmAppService farmAppService) :
+        public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IFarmAppService farmAppService) :
             base(navigationService)
         {
             Title = LogsPageTitle;
@@ -111,7 +111,7 @@ namespace FarmApp.ViewModels
             User = new User();
             UserPerson = new UserPerson();
             LogInCommand = new Command(async () => await OnLogin());
-            SingUpCommand = new Command(async () => await OnSingUp());
+            SingUpCommand = new Command(async () => await OnSignUp());
         }
 
         public async Task OnLogin()
@@ -125,14 +125,14 @@ namespace FarmApp.ViewModels
             else
             {
                 string LoginAlertDescription = $"{SuccessLoginAlertDescription}, {User.UserName}";
-               
+
                 // Agregando usuario a la BD, si devuelve null es porque hubo un error
                 var user = await _farmAppApiService.LoginUserAsync(User);
                 
-                if(user != null)
+                if (user != null)
                 {
                     await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
-                    
+
                     await _pageDialogService.DisplayAlertAsync(
                         SuccessLoginAlertTitle, LoginAlertDescription, Constants.OkAlert
                     );
@@ -165,19 +165,19 @@ namespace FarmApp.ViewModels
             UserPerson.BirthDate = SelectedDate.Date;
         }
 
-        public async Task OnSingUp()
+        public async Task OnSignUp()
         {
             if (string.IsNullOrEmpty(UserPerson.FirstName) | string.IsNullOrEmpty(UserPerson.LastName) |
                 string.IsNullOrEmpty(UserPerson.Password) | string.IsNullOrEmpty(ConfirmPassword))
             {
 
-                await _pageDialogService.DisplayAlertAsync(
+                await App.Current.MainPage.DisplayAlert(
                     InvalidFieldsAlertTitle, InvalidFieldsAlertDescription, Constants.OkAlert
                 );
             }
             else if (UserPerson.Password != ConfirmPassword)
             {
-                await _pageDialogService.DisplayAlertAsync(
+                await App.Current.MainPage.DisplayAlert(
                     InvalidPasswordAlertTitle, InvalidPasswordAlertDescription, Constants.OkAlert
                 );
             }
@@ -186,16 +186,16 @@ namespace FarmApp.ViewModels
                 string SignUpAlertDescription = $"{SuccessSignupAlertDescription}, {UserPerson.FirstName}";
 
                 var person = await _farmAppApiService.RegisterUserAsync(UserPerson);
-
+                
                 if (person != null)
                 {
-                    await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
-                    await _pageDialogService.DisplayAlertAsync(
+                    await App.Current.MainPage.Navigation.PushModalAsync(new HomePage());
+                    await App.Current.MainPage.DisplayAlert(
                         SuccessSignupAlertTitle, SignUpAlertDescription, Constants.OkAlert
                      );
                 }
                 else
-                    await _pageDialogService.DisplayAlertAsync(
+                    await App.Current.MainPage.DisplayAlert(
                         FailSignupAlertTitle, FailSignupAlertDescription, Constants.OkAlert
                      );
 

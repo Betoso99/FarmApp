@@ -26,9 +26,9 @@ namespace FarmApp.Services
 
                 return products;
             }
-            
+
             return null;
-           
+
         }
 
         public async Task<IList<Product>> SearchProductsAsync(string nameInputSearch)

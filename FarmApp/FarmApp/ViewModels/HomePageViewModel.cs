@@ -24,6 +24,7 @@ namespace FarmApp.ViewModels
         private readonly INavigationService _navigationService;
         private readonly IPageDialogService _dialogService;
         private readonly IGoogleMapsService _googleMapsService;
+        private readonly IFarmAppService _farmAppService;
         #endregion
 
         #region Commands
@@ -35,6 +36,7 @@ namespace FarmApp.ViewModels
         #region Models
         public Location CurrentLocation { get; set; }
         public ObservableCollection<Pin> Pins { get; set; }
+
         #endregion
 
         public string LocationImage => "location.png";
@@ -43,6 +45,8 @@ namespace FarmApp.ViewModels
         public string OriginLatitude { get; set; }
         public string DestinationLongitude { get; set; }
         public string DestinationLatitude { get; set; }
+
+        public string EntryText { get; set; }
 
         #region Constants
         const string NoInternetConnectionAlertTitle = "Connection Error";
@@ -53,15 +57,16 @@ namespace FarmApp.ViewModels
         #endregion
 
         
-        public HomePageViewModel(INavigationService navigationService, IPageDialogService dialogService, IGoogleMapsService googleMapsService) :
-            base(navigationService)
+        public HomePageViewModel(INavigationService navigationService, IPageDialogService dialogService, IGoogleMapsService googleMapsService, IFarmAppService farmAppService)
+            :base(navigationService)
         {
             _dialogService = dialogService;
             _navigationService = navigationService;
             _googleMapsService = googleMapsService;
+            _farmAppService = farmAppService;
 
             CurrentLocation = null;
-            Pins = null;
+            //Pins = null;
             SetCurrentLocation();
 
             GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
@@ -98,21 +103,42 @@ namespace FarmApp.ViewModels
             // Aqui va el codigo para obtener las farmacias que correspondan con el producto a buscar
             //luego se crean una lista de pins con esa info
 
-            IList<Pin> pins = new List<Pin>();
-            Pin newPin = new Pin
+            Product product = await _farmAppService.GetProductByNameAsync(EntryText);
+
+            if (product != null)
             {
-                Type = PinType.Place,
-                Position = new Position(18.468780, -69.922476),
-                Label = "Current",
-                Address = "Location",
-                Tag = string.Empty
-            };
+                IList<Pharmacy> pharmacies = await _farmAppService.GetProductPharmaciesAsync(product.Id);
 
-            newPin.Clicked += OnPinClick;
+                IList<Pin> pins = new List<Pin>();
 
-            pins.Add(newPin);
+                foreach (Pharmacy pharmacy in pharmacies)
+                {
+                    Pin pin = new Pin
+                    {
+                        Type = PinType.Place,
+                        Position = new Position((double)pharmacy.Latitude, (double)pharmacy.Longitude),
+                        Label = pharmacy.Name,
+                        Address = pharmacy.Address,
+                        Tag = string.Empty
+                    };
 
-            Pins = new ObservableCollection<Pin>(pins);
+                    pin.Clicked += OnPinClick;
+
+                    pins.Add(pin);
+                }
+
+                Pins = new ObservableCollection<Pin>(pins);
+            }
+            else
+            {
+                const string SearchNotFoundAlertTitle = "Product not found";
+                const string SearchNotFoundAlertDescription = "Sorry, no product was found";
+
+                await _dialogService.DisplayAlertAsync(SearchNotFoundAlertTitle,
+                                                       SearchNotFoundAlertDescription,
+                                                       Constants.OkAlert);
+            }
+            
         }
 
         private async void OnPinClick(object sender, EventArgs e)
