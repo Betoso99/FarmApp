@@ -54,14 +54,20 @@
                     <Entry x:Name="Username" Placeholder="Username" 
                            Style="{StaticResource EntryLabelStyle}"
                            Text="{Binding UserPerson.UserName, Mode=TwoWay}"/>
-                    <Entry x:Name="Pass" Placeholder="Password" IsPassword="True" 
+                    <Entry x:Name="Registration_Pass" Placeholder="Password" IsPassword="True" 
                            Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric"
                            Text="{Binding UserPerson.Password, Mode=TwoWay}"/>
-                    <Entry x:Name="Pass2" Placeholder="Confirm Password" IsPassword="True" 
+                    <Entry x:Name="Confirmation_Pass" Placeholder="Confirm Password" IsPassword="True" 
                            Style="{StaticResource EntryLabelStyle}"
                            Keyboard="Numeric" 
                            Text="{Binding ConfirmPassword, Mode=TwoWay}"/>
+                    <Picker x:Name="PickerTypeGemder"
+                        ItemsSource="{Binding Genders}"
+                        SelectedItem="{Binding SelectedGender}"
+                        ItemDisplayBinding="{Binding Gender}"
+                        Title="Gender"/>
+                    <DatePicker Date="{Binding SelectedDate}"/>
                     <Button x:Name="Signup" Text="Sign Up"
                            BackgroundColor="Cyan"
                            TextColor="{StaticResource ButtonTextColor}"
