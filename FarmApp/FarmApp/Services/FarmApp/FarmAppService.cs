@@ -119,7 +119,7 @@ namespace FarmApp.Services
             return null;
         }
 
-        public async Task<IList<ProductPharmacy>> GetPharmacyProductsAsync(int pharmacyId)
+        public async Task<List<ProductPharmacy>> GetPharmacyProductsAsync(int pharmacyId)
         {
             var response = await farmAppApi.GetPharmacyProducts(pharmacyId);
 

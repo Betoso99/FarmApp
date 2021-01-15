@@ -66,7 +66,7 @@ namespace FarmApp.ViewModels
             _farmAppService = farmAppService;
 
             CurrentLocation = null;
-            //Pins = null;
+            Pins = null;
             SetCurrentLocation();
 
             GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
@@ -116,10 +116,10 @@ namespace FarmApp.ViewModels
                     Pin pin = new Pin
                     {
                         Type = PinType.Place,
-                        Position = new Position((double)pharmacy.Latitude, (double)pharmacy.Longitude),
+                        Position = new Position(Decimal.ToDouble(pharmacy.Longitude), Decimal.ToDouble(pharmacy.Latitude)),
                         Label = pharmacy.Name,
                         Address = pharmacy.Address,
-                        Tag = string.Empty
+                        Tag = pharmacy.Id
                     };
 
                     pin.Clicked += OnPinClick;
@@ -143,6 +143,12 @@ namespace FarmApp.ViewModels
 
         private async void OnPinClick(object sender, EventArgs e)
         {
+
+
+            //var p = new NavigationParameters
+            //{
+            //    { "pharmacyId", (int)pin.Tag }
+            //};
             Pin pin = (Pin)sender;
             await _navigationService.NavigateAsync($"{Constants.StorePage}");
         }
