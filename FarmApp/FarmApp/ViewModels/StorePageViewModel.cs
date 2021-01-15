@@ -11,10 +11,11 @@ namespace FarmApp.ViewModels
 {
     public class StorePageViewModel : ViewModelBase
     {
-
+        #region Services
         private readonly INavigationService _navigationService;
         private readonly IPageDialogService _pageDialogService;
 
+        #endregion
 
         private const string StorePageTitle = "Store";
         private int PharmacyId { get; set; }

@@ -43,16 +43,6 @@ namespace FarmApp.ViewModels
 
         #endregion
 
-        public string LocationImage => "location.png";
-        public string LogoutImage => "back_arrow.png";
-
-        public string OriginLongitude { get; set; }
-        public string OriginLatitude { get; set; }
-        public string DestinationLongitude { get; set; }
-        public string DestinationLatitude { get; set; }
-
-        public string EntryText { get; set; }
-
         #region Constants
         const string NoInternetConnectionAlertTitle = "Connection Error";
         const string NoInternetConnectionAlertDescription = "Please check your internet connection";
@@ -61,7 +51,10 @@ namespace FarmApp.ViewModels
         const string NoRouteAlertDescription = "No route found";
         #endregion
 
-        
+        public string LocationImage => "location.png";
+        public string LogoutImage => "back_arrow.png";
+        public string EntryText { get; set; }
+
         public HomePageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IGoogleMapsService googleMapsService, 
             IFarmAppService farmAppService, IDialogService dialogService)
             :base(navigationService)
@@ -77,7 +70,6 @@ namespace FarmApp.ViewModels
             SetCurrentLocation();
             getProducts();
 
-            GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
             SearchCommand = new DelegateCommand(async () => await OnSearchAsync());
             LogoutCommand = new DelegateCommand(async () => await OnLogout());
             CurrentLocationCommand = new DelegateCommand(SetCurrentLocation);
@@ -190,30 +182,6 @@ namespace FarmApp.ViewModels
         {
             await _navigationService.NavigateAsync($"/{Constants.LogsPage}");
         }
-
-
-        async Task GetDataDirectionsAsync()
-        {
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
-            {
-                
-                await _pageDialogService.DisplayAlertAsync(NoInternetConnectionAlertTitle, 
-                                                       NoInternetConnectionAlertDescription,
-                                                       Constants.OkAlert);
-                return;
-            }
-
-            GoogleDirection directions = await _googleMapsService.GetDirectionAsync(OriginLatitude, OriginLongitude, DestinationLatitude, DestinationLongitude);
-
-            if (directions?.Routes != null && directions.Routes.Count > 0)
-            {
-                var positions = (Enumerable.ToList(PolylineHelper.Decode(directions.Routes.First().OverviewPolyline.Points)));
-            }
-            else 
-                await _pageDialogService.DisplayAlertAsync(NoRouteAlertTitle, NoRouteAlertDescription, Constants.OkAlert);
-         
-        }
-
 
     }
 }

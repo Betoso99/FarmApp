@@ -12,18 +12,21 @@ namespace FarmApp.ViewModels
 {
     public class InfoPageViewModel : ViewModelBase
     {
-
+        #region Services
         private readonly INavigationService _navigationService;
         private readonly IFarmAppService _farmAppService;
 
-        // TODO: Need to get this info from a model/DTO (probably called PharmacyInfo) 
+        #endregion
+
+        #region Constants
+        private const string InfoPageTitle = "Information";
+
+        #endregion
+
         public string Address { get; set; }
         public string Schedule { get; set; }
         public string Phone { get; set; }
         public string Name { get; set; }
-
-        private const string InfoPageTitle = "Information";
-
         private int PharmacyId { get; set; }
 
         public InfoPageViewModel(INavigationService navigationService, IFarmAppService farmAppService) :

@@ -81,6 +81,7 @@
                            BackgroundColor="Cyan"
                             BorderColor="Black"
                             BorderWidth="0.5"
+                            Margin="15"
                            TextColor="{StaticResource ButtonTextColor}"
                            Command="{Binding SingUpCommand}" CornerRadius="200"/>
                 </StackLayout>
