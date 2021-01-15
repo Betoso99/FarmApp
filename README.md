@@ -15,6 +15,20 @@ To test the project you need to put your own [Google Maps API Key](https://devel
 
 ## Project Screenshots
 
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_3.gif)
+
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_1.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_2.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_3.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_4.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_5.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_6.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_7.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_8.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_9.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_10.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_11.jpg)
+![](https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_12.jpg)
 ## Group members
 
 Member| ID
