@@ -8,8 +8,8 @@
             Title="{Binding Title}">
     <TabbedPage.Children>
         <views:InfoPage/>
-        <views:SharePage/>
         <views:InventoryPage/>
+        <views:SharePage/>
     </TabbedPage.Children>
     
 </TabbedPage>

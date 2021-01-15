@@ -4,9 +4,12 @@
             xmlns:prism="http://prismlibrary.com"
             prism:ViewModelLocator.AutowireViewModel="True"
             x:Class="FarmApp.Views.LogsPage"
-            Title="{Binding Title}">
+            Title="{Binding Title}"
+            BackgroundColor="White">
 
-    <ContentPage Title="{Binding LoginTitle}" BackgroundImageSource="{Binding LogsBackgroundImage}" IconImageSource="{Binding LoginIconImage}">
+    <ContentPage Title="{Binding LoginTitle}" BackgroundImageSource="{Binding LogsBackgroundImage}" 
+                 IconImageSource="{Binding LoginIconImage}"
+                 BackgroundColor="White">
         <StackLayout VerticalOptions="CenterAndExpand">
             <Image Source="LogoFarmApp.png" VerticalOptions="Start" Margin="50,0,50,0"/>
             <ScrollView>
@@ -22,6 +25,8 @@
                             TextColor="{StaticResource ButtonTextColor}" 
                             WidthRequest="100" 
                             BackgroundColor="Cyan"
+                            BorderColor="Black"
+                            BorderWidth="0.5"
                             Command="{Binding LogInCommand}" CornerRadius="200"/>
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Wanna create an account?" TextColor="Black" Margin="0,15,0,0"/>
@@ -29,6 +34,8 @@
                                 ScaleY="0.8"
                                 HorizontalOptions="EndAndExpand"
                                 BackgroundColor="Cyan"
+                                BorderColor="Black"
+                                BorderWidth="0.5"
                                 TextColor="{StaticResource ButtonTextColor}"
                                 CornerRadius="200"/>
                     </StackLayout>
@@ -37,7 +44,9 @@
         </StackLayout>
     </ContentPage>
 
-    <ContentPage x:Name="SignUpView" Title="{Binding SignUpTitle}" BackgroundImageSource="{Binding LogsBackgroundImage}" IconImageSource="{Binding LoginIconImage}">
+    <ContentPage x:Name="SignUpView" Title="{Binding SignUpTitle}" BackgroundImageSource="{Binding LogsBackgroundImage}" 
+                 IconImageSource="{Binding SignUpIconImage}"
+                 BackgroundColor="White">
         <StackLayout>
             <Image Source="LogoFarmApp.png" VerticalOptions="Start" Margin="50,50,50,0"/>
             <ScrollView>
@@ -70,6 +79,8 @@
                     <DatePicker Date="{Binding SelectedDate}"/>
                     <Button Text="Sign Up"
                            BackgroundColor="Cyan"
+                            BorderColor="Black"
+                            BorderWidth="0.5"
                            TextColor="{StaticResource ButtonTextColor}"
                            Command="{Binding SingUpCommand}" CornerRadius="200"/>
                 </StackLayout>

@@ -49,7 +49,7 @@ namespace FarmApp.ViewModels
             PharmacyId = Store.CurrentStoreId;
 
             CopyCommand = new DelegateCommand(async () => await Copy());
-            CopyCommand = new DelegateCommand(async () => await OpenMap());
+            OpenMapCommand = new DelegateCommand(async () => await OpenMap());
         }
 
         async Task Copy()

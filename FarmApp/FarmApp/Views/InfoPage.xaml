@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.InfoPage"
              Title="{Binding Title}" 
-             BackgroundColor="LightGray">
+             BackgroundColor="White"
+             >
 
     <ScrollView>
         <StackLayout>
@@ -29,8 +30,8 @@
                 </Frame>
                 <StackLayout Grid.Row="0" Grid.Column="1" Style="{StaticResource StackStyle}">
                     <Label Text="Name:" FontAttributes="Bold" FontSize="Medium"/>
-                    <Frame>
-                        <Label x:Name="Web" Text="{Binding Name}" FontSize="Medium"/>
+                    <Frame BackgroundColor="LightGray">
+                        <Label x:Name="Web" Text="{Binding Name}" FontAttributes="Bold" FontSize="Medium"/>
                     </Frame>
                 </StackLayout>
 
@@ -39,8 +40,8 @@
                 </Frame>
                 <StackLayout Grid.Row="1" Grid.Column="1" Style="{StaticResource StackStyle}">
                     <Label Text="Direction: " FontAttributes="Bold" FontSize="Medium"/>
-                    <Frame>
-                        <Label x:Name="Direction" Text="{Binding Address}" FontAttributes="Bold" FontSize="Medium"/>
+                    <Frame BackgroundColor="LightGray">
+                        <Label x:Name="Direction"  Text="{Binding Address}" FontAttributes="Bold" FontSize="Medium"/>
                     </Frame>
                 </StackLayout>
 
@@ -49,7 +50,7 @@
                 </Frame>
                 <StackLayout Grid.Row="2" Grid.Column="1" Style="{StaticResource StackStyle}">
                     <Label Text="Schedule:" FontAttributes="Bold" FontSize="Medium"/>
-                    <Frame>
+                    <Frame BackgroundColor="LightGray">
                         <Label x:Name="Schedule" Text="{Binding Schedule}" FontAttributes="Bold" FontSize="Medium"/>
                     </Frame>
                 </StackLayout>
@@ -57,9 +58,9 @@
                 <Frame Grid.Row="3" Grid.Column="0" Style="{StaticResource FrameStyle}">
                     <Image Source="MyPhone.png"/>
                 </Frame>
-                <StackLayout Grid.Row="3" Grid.Column="1" Style="{StaticResource StackStyle}">
+                <StackLayout Grid.Row="3" Grid.Column="1"  Style="{StaticResource StackStyle}">
                     <Label Text="Phone:" FontAttributes="Bold" FontSize="Medium"/>
-                    <Frame>
+                    <Frame BackgroundColor="LightGray">
                         <Label x:Name="Phone" Text="{Binding Phone}" FontAttributes="Bold" FontSize="Medium"/>
                     </Frame>
                 </StackLayout>
