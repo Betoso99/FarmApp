@@ -14,7 +14,6 @@ namespace FarmApp
         public const string HomePage = nameof(HomePage);
         public const string StorePage = nameof(StorePage);
         public const string InfoPage = nameof(InfoPage);
-        public const string OpinionsPage = nameof(OpinionsPage);
         public const string SharePage = nameof(SharePage);
         public const string LogsPage = nameof(LogsPage);
         public const string InventoryPage = nameof(InventoryPage);
