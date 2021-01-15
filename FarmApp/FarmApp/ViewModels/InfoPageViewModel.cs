@@ -24,16 +24,15 @@ namespace FarmApp.ViewModels
 
         private const string InfoPageTitle = "Information";
 
-        public int PharmacyId { get; set; }
+        private int PharmacyId { get; set; }
 
         public InfoPageViewModel(INavigationService navigationService, IFarmAppService farmAppService) :
             base(navigationService)
         {
-            
             Title = InfoPageTitle;
-
             _navigationService = navigationService;
             _farmAppService = farmAppService;
+            PharmacyId = Store.CurrentStoreId;
 
             // TODO: Unfinished logic, look for logic to get the pharmcyid from StorePage
             //PharmacyId = pharmacyId;

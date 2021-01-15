@@ -33,6 +33,7 @@ namespace FarmApp.ViewModels
         public DelegateCommand GetRouteCommand { get; set; }
         public DelegateCommand SearchCommand { get; set; }
         public DelegateCommand CurrentLocationCommand { get; set; }
+        public DelegateCommand LogoutCommand { get; set; }
         #endregion
 
         #region Models
@@ -43,6 +44,7 @@ namespace FarmApp.ViewModels
         #endregion
 
         public string LocationImage => "location.png";
+        public string LogoutImage => "back_arrow.png";
 
         public string OriginLongitude { get; set; }
         public string OriginLatitude { get; set; }
@@ -76,9 +78,8 @@ namespace FarmApp.ViewModels
             getProducts();
 
             GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
-
             SearchCommand = new DelegateCommand(async () => await OnSearchAsync());
-
+            LogoutCommand = new DelegateCommand(async () => await OnLogout());
             CurrentLocationCommand = new DelegateCommand(SetCurrentLocation);
         }
 
@@ -175,12 +176,18 @@ namespace FarmApp.ViewModels
         {
 
 
-            //var p = new NavigationParameters
-            //{
-            //    { "pharmacyId", (int)pin.Tag }
-            //};
             Pin pin = (Pin)sender;
-            await _navigationService.NavigateAsync($"{Constants.StorePage}");
+            var parameter = new NavigationParameters();
+            parameter.Add("pharmacyId", pin.Tag.ToString());
+
+            Store.CurrentStoreId = int.Parse(pin.Tag.ToString());
+
+            await _navigationService.NavigateAsync($"{Constants.StorePage}", parameter);
+        }
+
+        private async Task OnLogout()
+        {
+            await _navigationService.NavigateAsync($"/{Constants.LogsPage}");
         }
 
 

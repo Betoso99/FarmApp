@@ -141,6 +141,7 @@ namespace FarmApp.ViewModels
                 }
                 else
                 {
+                    _dialogService.HideLoading();
                     await _pageDialogService.DisplayAlertAsync(
                         InvalidLoginAlertTitle, InvalidLoginAlertDescription, Constants.OkAlert
                     );
