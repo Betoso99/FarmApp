@@ -6,8 +6,9 @@
              x:Class="FarmApp.Views.InventoryPage"
              Title="{Binding Title}"
              BackgroundColor="LightGray">
-    
-    <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" ItemsSource="{Binding PharmacyProducts}">
+
+    <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" SelectionMode="None" 
+              CachingStrategy="RecycleElement" ItemsSource="{Binding PharmacyProducts}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

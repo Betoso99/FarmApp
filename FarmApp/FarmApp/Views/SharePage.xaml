@@ -7,10 +7,13 @@
              Title="{Binding Title}"
              BackgroundColor="LightGray">
     <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-        <Label Text="{Binding Link}"/>
-        <Frame IsClippedToBounds="True" Padding="0" CornerRadius="200">
-            <Button Text="Copy" Command="{Binding CopyCommand}"/>
+        <Frame IsClippedToBounds="True" Padding="0" CornerRadius="200" >
+            <Button Text="Open External map" BackgroundColor="White" CornerRadius="150"  Command="{Binding CopyCommand}"/>
         </Frame>
+        <Frame IsClippedToBounds="True" Padding="0" CornerRadius="200" >
+            <Button Text="Copy Link" BackgroundColor="White" CornerRadius="150"  Command="{Binding CopyCommand}"/>
+        </Frame>
+        <Label Text="{Binding Link}"/>
     </StackLayout>
   
 </ContentPage>
