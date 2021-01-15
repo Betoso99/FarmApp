@@ -22,9 +22,6 @@
         <Frame AbsoluteLayout.LayoutBounds="0.5,0.03,0.9,0.06" AbsoluteLayout.LayoutFlags="All"
             CornerRadius="10" BackgroundColor="White" Padding="10,0,10,0">
             <StackLayout Orientation="Horizontal" Spacing="10">
-                <!--<Entry Placeholder="Search" Text="{Binding EntryText, Mode=TwoWay}" HorizontalOptions="FillAndExpand"/>
-                <ImageButton Source="search.png" WidthRequest="30" BackgroundColor="Transparent" Margin="0"
-                             Command="{Binding SearchCommand}"/>-->
                 <autocomplete:SfAutoComplete HeightRequest="40"
                                              Text="{Binding EntryText, Mode=TwoWay}"
                                              HorizontalOptions="FillAndExpand"
@@ -41,13 +38,13 @@
         </Frame>
 
         <StackLayout Spacing="5"
-                     AbsoluteLayout.LayoutBounds="0.05,0.90,40,40" AbsoluteLayout.LayoutFlags="PositionProportional">
+                     AbsoluteLayout.LayoutBounds="0.05,0.95,40,80" AbsoluteLayout.LayoutFlags="PositionProportional">
             <Frame  BackgroundColor="White" Padding="0" Margin="0" IsClippedToBounds="True" CornerRadius="150">
                 <ImageButton Source="{Binding LogoutImage}"  Margin="0" Padding="10"  BackgroundColor="Transparent" CornerRadius="150" Aspect="AspectFill"
                            Command="{Binding LogoutCommand}"/>
             </Frame>
             <Frame  BackgroundColor="White" Padding="0" Margin="0" IsClippedToBounds="True" CornerRadius="150">
-                <ImageButton Source="{Binding LocationImage}"  Margin="0" Padding="10"  BackgroundColor="Transparent" CornerRadius="150" Aspect="AspectFill"
+                <ImageButton Source="{Binding LocationImage}"  Margin="0" Padding="10"  BackgroundColor="White" CornerRadius="150" Aspect="AspectFill"
                            Command="{Binding CurrentLocationCommand}"/>
             </Frame>
         </StackLayout>
