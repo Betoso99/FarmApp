@@ -45,7 +45,6 @@ namespace FarmApp.ViewModels
         private const string SuccessSignupAlertTitle = "Welcome";
         private const string SuccessSignupAlertDescription = "Welcome to FarmApp";
 
-
         private const string FailSignupAlertTitle = "Sign Up failed";
         private const string FailSignupAlertDescription = "Seems like this email already exists from another acount";
 
@@ -96,8 +95,6 @@ namespace FarmApp.ViewModels
         public string SignUpTitle => "Sign Up";
         public string SignUpIconImage => "SignUp.png";
 
-        
-        
 
         public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IFarmAppService farmAppService) :
             base(navigationService)
@@ -105,7 +102,6 @@ namespace FarmApp.ViewModels
             Title = LogsPageTitle;
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
-            _farmAppApiService = farmAppService;
 
             PickerGender();
             User = new User();
@@ -118,9 +114,9 @@ namespace FarmApp.ViewModels
         {
             if (string.IsNullOrEmpty(User.UserName) | string.IsNullOrEmpty(User.Password))
             {
-                await _pageDialogService.DisplayAlertAsync(
-                    InvalidFieldsAlertTitle, InvalidFieldsAlertDescription, Constants.OkAlert
-                );
+                await App.Current.MainPage.DisplayAlert(InvalidFieldsAlertTitle,
+                                                        InvalidFieldsAlertDescription,
+                                                        Constants.OkAlert);
             }
             else
             {
@@ -144,7 +140,6 @@ namespace FarmApp.ViewModels
                     );
                 }
                     
-             
             }
         }
 
@@ -180,11 +175,12 @@ namespace FarmApp.ViewModels
                 await App.Current.MainPage.DisplayAlert(
                     InvalidPasswordAlertTitle, InvalidPasswordAlertDescription, Constants.OkAlert
                 );
+                          
             }
             else
             {
                 string SignUpAlertDescription = $"{SuccessSignupAlertDescription}, {UserPerson.FirstName}";
-
+                
                 var person = await _farmAppApiService.RegisterUserAsync(UserPerson);
                 
                 if (person != null)
@@ -198,6 +194,7 @@ namespace FarmApp.ViewModels
                     await App.Current.MainPage.DisplayAlert(
                         FailSignupAlertTitle, FailSignupAlertDescription, Constants.OkAlert
                      );
+
 
             }
         }
