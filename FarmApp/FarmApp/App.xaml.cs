@@ -41,7 +41,8 @@ namespace FarmApp
 
 			containerRegistry.Register<IGoogleMapsService, GoogleMapsService>();
 			containerRegistry.Register<IFarmAppService, FarmAppService>();
-			
+			containerRegistry.Register<IDialogService, DialogService>();
+
 		}
 	}
 }

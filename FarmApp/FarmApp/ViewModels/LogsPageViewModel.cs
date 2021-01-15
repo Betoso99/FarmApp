@@ -17,10 +17,11 @@ namespace FarmApp.ViewModels
     {
 
         #region Services
-
         private readonly INavigationService _navigationService;
         private readonly IPageDialogService _pageDialogService;
         private readonly IFarmAppService _farmAppApiService;
+        private readonly IDialogService _dialogService;
+
         #endregion
 
         #region Commands
@@ -96,13 +97,15 @@ namespace FarmApp.ViewModels
         public string SignUpIconImage => "SignUp.png";
 
 
-        public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IFarmAppService farmAppService) :
+        public LogsPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IFarmAppService farmAppService,
+            IDialogService dialogService) :
             base(navigationService)
         {
             Title = LogsPageTitle;
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
             _farmAppApiService = farmAppService;
+            _dialogService = dialogService;
 
             PickerGender();
             User = new User();
@@ -121,6 +124,7 @@ namespace FarmApp.ViewModels
             }
             else
             {
+                _dialogService.ShowLoading("Loading");
                 string LoginAlertDescription = $"{SuccessLoginAlertDescription}, {User.UserName}";
 
                 // Agregando usuario a la BD, si devuelve null es porque hubo un error
@@ -128,6 +132,7 @@ namespace FarmApp.ViewModels
                 
                 if (user != null)
                 {
+                    _dialogService.HideLoading();
                     await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
 
                     await _pageDialogService.DisplayAlertAsync(
@@ -180,12 +185,14 @@ namespace FarmApp.ViewModels
             }
             else
             {
+                _dialogService.ShowLoading("Loading");
                 string SignUpAlertDescription = $"{SuccessSignupAlertDescription}, {UserPerson.FirstName}";
                 
                 var person = await _farmAppApiService.RegisterUserAsync(UserPerson);
                 
                 if (person != null)
                 {
+                    _dialogService.HideLoading();
                     await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
                     await _pageDialogService.DisplayAlertAsync(
                         SuccessSignupAlertTitle, SignUpAlertDescription, Constants.OkAlert

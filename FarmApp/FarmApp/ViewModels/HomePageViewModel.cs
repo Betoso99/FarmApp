@@ -22,9 +22,11 @@ namespace FarmApp.ViewModels
 
         #region Services
         private readonly INavigationService _navigationService;
-        private readonly IPageDialogService _dialogService;
+        private readonly IPageDialogService _pageDialogService;
         private readonly IGoogleMapsService _googleMapsService;
         private readonly IFarmAppService _farmAppService;
+        private readonly IDialogService _dialogService;
+
         #endregion
 
         #region Commands
@@ -58,13 +60,15 @@ namespace FarmApp.ViewModels
         #endregion
 
         
-        public HomePageViewModel(INavigationService navigationService, IPageDialogService dialogService, IGoogleMapsService googleMapsService, IFarmAppService farmAppService)
+        public HomePageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IGoogleMapsService googleMapsService, 
+            IFarmAppService farmAppService, IDialogService dialogService)
             :base(navigationService)
         {
-            _dialogService = dialogService;
+            _pageDialogService = pageDialogService;
             _navigationService = navigationService;
             _googleMapsService = googleMapsService;
             _farmAppService = farmAppService;
+            _dialogService = dialogService;
 
             CurrentLocation = null;
             Pins = null;
@@ -126,6 +130,7 @@ namespace FarmApp.ViewModels
                 return;
             }
 
+            _dialogService.ShowLoading("Loading");
             Product product = await _farmAppService.GetProductByNameAsync(EntryText);
 
             if (product != null)
@@ -150,14 +155,16 @@ namespace FarmApp.ViewModels
                     pins.Add(pin);
                 }
 
+                _dialogService.HideLoading();
                 Pins = new ObservableCollection<Pin>(pins);
             }
             else
             {
+                _dialogService.HideLoading();
                 const string SearchNotFoundAlertTitle = "Product not found";
                 const string SearchNotFoundAlertDescription = "Sorry, no product was found";
 
-                await _dialogService.DisplayAlertAsync(SearchNotFoundAlertTitle,
+                await _pageDialogService.DisplayAlertAsync(SearchNotFoundAlertTitle,
                                                        SearchNotFoundAlertDescription,
                                                        Constants.OkAlert);
             }
@@ -182,7 +189,7 @@ namespace FarmApp.ViewModels
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 
-                await _dialogService.DisplayAlertAsync(NoInternetConnectionAlertTitle, 
+                await _pageDialogService.DisplayAlertAsync(NoInternetConnectionAlertTitle, 
                                                        NoInternetConnectionAlertDescription,
                                                        Constants.OkAlert);
                 return;
@@ -195,7 +202,7 @@ namespace FarmApp.ViewModels
                 var positions = (Enumerable.ToList(PolylineHelper.Decode(directions.Routes.First().OverviewPolyline.Points)));
             }
             else 
-                await _dialogService.DisplayAlertAsync(NoRouteAlertTitle, NoRouteAlertDescription, Constants.OkAlert);
+                await _pageDialogService.DisplayAlertAsync(NoRouteAlertTitle, NoRouteAlertDescription, Constants.OkAlert);
          
         }
 
