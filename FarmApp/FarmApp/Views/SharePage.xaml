@@ -5,15 +5,15 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.SharePage"
              Title="{Binding Title}"
-             BackgroundColor="LightGray">
-    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+             BackgroundColor="White">
+    <StackLayout VerticalOptions="Center" WidthRequest="300" HorizontalOptions="Center">
         <Frame IsClippedToBounds="True" Padding="0" CornerRadius="200" >
-            <Button Text="Open External map" BackgroundColor="White" CornerRadius="150"  Command="{Binding CopyCommand}"/>
+            <Button Text="Open External map" BackgroundColor="LightGray" CornerRadius="150"  Command="{Binding OpenMapCommand}"/>
         </Frame>
         <Frame IsClippedToBounds="True" Padding="0" CornerRadius="200" >
-            <Button Text="Copy Link" BackgroundColor="White" CornerRadius="150"  Command="{Binding CopyCommand}"/>
+            <Button Text="Copy Link" BackgroundColor="LightGray" CornerRadius="150"  Command="{Binding CopyCommand}"/>
         </Frame>
-        <Label Text="{Binding Link}"/>
+        <Label Text="{Binding Link}" HorizontalTextAlignment="Center"/>
     </StackLayout>
   
 </ContentPage>

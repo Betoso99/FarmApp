@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.InventoryPage"
              Title="{Binding Title}"
-             BackgroundColor="LightGray">
+             BackgroundColor="White">
 
     <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" SelectionMode="None" 
               CachingStrategy="RecycleElement" ItemsSource="{Binding PharmacyProducts}">
