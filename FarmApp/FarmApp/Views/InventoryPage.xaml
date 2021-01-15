@@ -6,6 +6,7 @@
              x:Class="FarmApp.Views.InventoryPage"
              Title="{Binding Title}"
              BackgroundColor="LightGray">
+    
     <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" ItemsSource="{Binding PharmacyProducts}">
         <ListView.ItemTemplate>
             <DataTemplate>
@@ -20,7 +21,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Text="{Binding Name}" Grid.Column="0"/>
+                            <Label Text="{Binding Name}" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                             <Grid Grid.Column="1" Padding="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -32,7 +33,7 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="Quantity:" Grid.Column="0" Grid.Row="0"/>
-                                <Label Text="{Binding Quantity}" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="{Binding Quantity}" Grid.Row="0" Grid.Column="1" />
                                 <Label Text="RD$:" Grid.Row="1" Grid.Column="0"/>
                                 <Label Text="{Binding Price}" Grid.Row="1" Grid.Column="1"/>
 
