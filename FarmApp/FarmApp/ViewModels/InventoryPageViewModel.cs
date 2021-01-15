@@ -15,7 +15,7 @@ namespace FarmApp.ViewModels
 	{
 		private readonly INavigationService _navigationService;
 		private readonly IFarmAppService _farmAppService;
-		public ObservableCollection<ProductPharmacy> PharmacyProducts { get; set; }
+		public IList<ProductPharmacy> PharmacyProducts { get; set; }
 
 		private int PharmacyId { get; set; }
 
@@ -26,23 +26,13 @@ namespace FarmApp.ViewModels
 			_navigationService = navigationService;
 			_farmAppService = farmAppService;
 			PharmacyId = Store.CurrentStoreId;
-
-
-			// TODO: Unfinished logic
-
-			//var prods = Task.Run(async () => await GetPharmacyProducts()).ConfigureAwait(false).GetAwaiter();
-
-			//         foreach (var prod in prods.GetResult())
-			//         {
-			//	PharmacyProducts.Add(prod);
-			//}
+			GetPharmacyProducts();
 		}
 
-		//private async Task<List<ProductPharmacy>> GetPharmacyProducts()
-  //      {
-		//	var products = await _farmAppService.GetPharmacyProductsAsync(PharmacyId);
-
-		//	return products;
-  //      }
+		private async void GetPharmacyProducts()
+		{
+			var products = await _farmAppService.GetPharmacyProductsAsync(PharmacyId);
+			PharmacyProducts = new ObservableCollection<ProductPharmacy>(products);
+		}
 	}
 }

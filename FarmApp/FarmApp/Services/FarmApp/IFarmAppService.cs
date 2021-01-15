@@ -21,7 +21,7 @@ namespace FarmApp.Services
 
         Task<IList<Pharmacy>> GetAllPharmaciesAsync();
         Task<Pharmacy> GetPharmacyAsync(int pharmacyId);
-        Task<List<ProductPharmacy>> GetPharmacyProductsAsync(int pharmacyId);
+        Task<IList<ProductPharmacy>> GetPharmacyProductsAsync(int pharmacyId);
         #endregion
 
         #region Users
