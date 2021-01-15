@@ -46,11 +46,6 @@ namespace FarmApp.ViewModels
 			Schedule = pharmacy.Schedule;
 			Phone = pharmacy.PhoneNumber;
 
-			//Name = "Farmacia Carol";
-			//Address = "Arroyo Hondp";
-			//Schedule = "8:00 - 12:00";
-			//Phone = "8096853566";
-
 		}
 	}
 }
