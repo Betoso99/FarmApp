@@ -36,6 +36,7 @@ namespace FarmApp.ViewModels
         #region Models
         public Location CurrentLocation { get; set; }
         public ObservableCollection<Pin> Pins { get; set; }
+        public ObservableCollection<Product> Products { get; set; }
 
         #endregion
 
@@ -68,6 +69,7 @@ namespace FarmApp.ViewModels
             CurrentLocation = null;
             Pins = null;
             SetCurrentLocation();
+            getProducts();
 
             GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
 
@@ -96,12 +98,33 @@ namespace FarmApp.ViewModels
                 CurrentLocation = CurrentLocation;
             }
         }
+
+        void getProducts()
+        {
+            try
+            {
+                var task = _farmAppService.GetAllProductsAsync();
+                task.ContinueWith(products =>
+                {
+                    Products = new ObservableCollection<Product>(products.Result);
+
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            
+        }
         
 
         private async Task OnSearchAsync()
         {
-            // Aqui va el codigo para obtener las farmacias que correspondan con el producto a buscar
-            //luego se crean una lista de pins con esa info
+            if (string.IsNullOrEmpty(EntryText))
+            {
+                Pins = new ObservableCollection<Pin>();
+                return;
+            }
 
             Product product = await _farmAppService.GetProductByNameAsync(EntryText);
 

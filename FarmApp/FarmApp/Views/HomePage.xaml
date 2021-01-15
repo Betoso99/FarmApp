@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:controls="clr-namespace:FarmApp.Controls"
+             xmlns:autocomplete="clr-namespace:Syncfusion.SfAutoComplete.XForms;assembly=Syncfusion.SfAutoComplete.XForms" 
+             xmlns:behaviorPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.HomePage"
              NavigationPage.HasNavigationBar="False">
@@ -20,7 +22,19 @@
         <Frame AbsoluteLayout.LayoutBounds="0.5,0.03,0.9,0.06" AbsoluteLayout.LayoutFlags="All"
             CornerRadius="10" BackgroundColor="White" Padding="10,0,10,0">
             <StackLayout Orientation="Horizontal" Spacing="10">
-                <Entry Placeholder="Search" Text="{Binding EntryText, Mode=TwoWay}" HorizontalOptions="FillAndExpand"/>
+                <!--<Entry Placeholder="Search" Text="{Binding EntryText, Mode=TwoWay}" HorizontalOptions="FillAndExpand"/>
+                <ImageButton Source="search.png" WidthRequest="30" BackgroundColor="Transparent" Margin="0"
+                             Command="{Binding SearchCommand}"/>-->
+                <autocomplete:SfAutoComplete HeightRequest="40"
+                                             Text="{Binding EntryText, Mode=TwoWay}"
+                                             HorizontalOptions="FillAndExpand"
+                                             DataSource="{Binding Products}"
+                                             DisplayMemberPath="Name"
+                                             Watermark="Search Product">
+                    <autocomplete:SfAutoComplete.Behaviors>
+                        <behaviorPack:EventToCommandBehavior EventName="SelectionChanged"></behaviorPack:EventToCommandBehavior>
+                    </autocomplete:SfAutoComplete.Behaviors>
+                </autocomplete:SfAutoComplete>
                 <ImageButton Source="search.png" WidthRequest="30" BackgroundColor="Transparent" Margin="0"
                              Command="{Binding SearchCommand}"/>
             </StackLayout>

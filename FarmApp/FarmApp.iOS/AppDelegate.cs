@@ -22,6 +22,7 @@ namespace FarmApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            new Syncfusion.SfAutoComplete.XForms.iOS.SfAutoCompleteRenderer();
             Xamarin.FormsGoogleMaps.Init(Constants.GoogleMapsApiKey);
             LoadApplication(new App(new iOSInitializer()));
 
