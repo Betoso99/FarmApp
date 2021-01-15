@@ -121,7 +121,7 @@ namespace FarmApp.ViewModels
             }
             
         }
-        
+
 
         private async Task OnSearchAsync()
         {
@@ -145,13 +145,14 @@ namespace FarmApp.ViewModels
                     Pin pin = new Pin
                     {
                         Type = PinType.Place,
-                        Position = new Position(Decimal.ToDouble(pharmacy.Longitude), Decimal.ToDouble(pharmacy.Latitude)),
+                        Position = new Position(decimal.ToDouble(pharmacy.Longitude), decimal.ToDouble(pharmacy.Latitude)),
                         Label = pharmacy.Name,
                         Address = pharmacy.Address,
                         Tag = pharmacy.Id
                     };
 
                     pin.Clicked += OnPinClick;
+                    
 
                     pins.Add(pin);
                 }
