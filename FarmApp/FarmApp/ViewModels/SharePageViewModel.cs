@@ -24,8 +24,11 @@ namespace FarmApp.ViewModels
         private readonly IFarmAppService _farmAppService;
         #endregion
 
+        #region Commands
         public DelegateCommand CopyCommand { get; set; }
         public DelegateCommand OpenMapCommand { get; set; }
+
+        #endregion
 
         #region Constants
         private const string SharePageTitle = "Share";
@@ -69,7 +72,6 @@ namespace FarmApp.ViewModels
         {
             Pharmacy pharmacy = await _farmAppService.GetPharmacyAsync(PharmacyId);
             var location = new Location(Decimal.ToDouble(pharmacy.Longitude), Decimal.ToDouble(pharmacy.Latitude));
-            //var options = new MapLaunchOptions { NavigationMode = Xamarin.Essentials.NavigationMode.Driving };
             
             try
             {
