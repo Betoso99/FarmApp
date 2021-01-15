@@ -21,7 +21,7 @@ namespace FarmApp
 		{
 			InitializeComponent();
 
-			await NavigationService.NavigateAsync($"{Constants.HomePage}");
+			await NavigationService.NavigateAsync($"{Constants.NavigationPage}/{Constants.HomePage}");
 		}
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry)
