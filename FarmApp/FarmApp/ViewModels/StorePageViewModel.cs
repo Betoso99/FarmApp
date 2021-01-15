@@ -10,7 +10,7 @@ namespace FarmApp.ViewModels
     public class StorePageViewModel : ViewModelBase
     {
 
-        public INavigationService _navigationService { get; set; }
+        private readonly INavigationService _navigationService;
 
         private const string StorePageTitle = "Store";
 

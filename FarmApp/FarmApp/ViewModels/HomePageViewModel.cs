@@ -22,9 +22,11 @@ namespace FarmApp.ViewModels
 
         #region Services
         private readonly INavigationService _navigationService;
-        private readonly IPageDialogService _dialogService;
+        private readonly IPageDialogService _pageDialogService;
         private readonly IGoogleMapsService _googleMapsService;
         private readonly IFarmAppService _farmAppService;
+        private readonly IDialogService _dialogService;
+
         #endregion
 
         #region Commands
@@ -36,6 +38,7 @@ namespace FarmApp.ViewModels
         #region Models
         public Location CurrentLocation { get; set; }
         public ObservableCollection<Pin> Pins { get; set; }
+        public ObservableCollection<Product> Products { get; set; }
 
         #endregion
 
@@ -57,17 +60,20 @@ namespace FarmApp.ViewModels
         #endregion
 
         
-        public HomePageViewModel(INavigationService navigationService, IPageDialogService dialogService, IGoogleMapsService googleMapsService, IFarmAppService farmAppService)
+        public HomePageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IGoogleMapsService googleMapsService, 
+            IFarmAppService farmAppService, IDialogService dialogService)
             :base(navigationService)
         {
-            _dialogService = dialogService;
+            _pageDialogService = pageDialogService;
             _navigationService = navigationService;
             _googleMapsService = googleMapsService;
             _farmAppService = farmAppService;
+            _dialogService = dialogService;
 
             CurrentLocation = null;
             Pins = null;
             SetCurrentLocation();
+            getProducts();
 
             GetRouteCommand = new DelegateCommand(async () => await GetDataDirectionsAsync());
 
@@ -96,13 +102,35 @@ namespace FarmApp.ViewModels
                 CurrentLocation = CurrentLocation;
             }
         }
+
+        void getProducts()
+        {
+            try
+            {
+                var task = _farmAppService.GetAllProductsAsync();
+                task.ContinueWith(products =>
+                {
+                    Products = new ObservableCollection<Product>(products.Result);
+
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            
+        }
         
 
         private async Task OnSearchAsync()
         {
-            // Aqui va el codigo para obtener las farmacias que correspondan con el producto a buscar
-            //luego se crean una lista de pins con esa info
+            if (string.IsNullOrEmpty(EntryText))
+            {
+                Pins = new ObservableCollection<Pin>();
+                return;
+            }
 
+            _dialogService.ShowLoading("Loading");
             Product product = await _farmAppService.GetProductByNameAsync(EntryText);
 
             if (product != null)
@@ -127,14 +155,16 @@ namespace FarmApp.ViewModels
                     pins.Add(pin);
                 }
 
+                _dialogService.HideLoading();
                 Pins = new ObservableCollection<Pin>(pins);
             }
             else
             {
+                _dialogService.HideLoading();
                 const string SearchNotFoundAlertTitle = "Product not found";
                 const string SearchNotFoundAlertDescription = "Sorry, no product was found";
 
-                await _dialogService.DisplayAlertAsync(SearchNotFoundAlertTitle,
+                await _pageDialogService.DisplayAlertAsync(SearchNotFoundAlertTitle,
                                                        SearchNotFoundAlertDescription,
                                                        Constants.OkAlert);
             }
@@ -159,7 +189,7 @@ namespace FarmApp.ViewModels
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 
-                await _dialogService.DisplayAlertAsync(NoInternetConnectionAlertTitle, 
+                await _pageDialogService.DisplayAlertAsync(NoInternetConnectionAlertTitle, 
                                                        NoInternetConnectionAlertDescription,
                                                        Constants.OkAlert);
                 return;
@@ -172,7 +202,7 @@ namespace FarmApp.ViewModels
                 var positions = (Enumerable.ToList(PolylineHelper.Decode(directions.Routes.First().OverviewPolyline.Points)));
             }
             else 
-                await _dialogService.DisplayAlertAsync(NoRouteAlertTitle, NoRouteAlertDescription, Constants.OkAlert);
+                await _pageDialogService.DisplayAlertAsync(NoRouteAlertTitle, NoRouteAlertDescription, Constants.OkAlert);
          
         }
 
