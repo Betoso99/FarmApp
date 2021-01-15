@@ -34,8 +34,8 @@ namespace FarmApp
             containerRegistry.RegisterForNavigation<InfoPage, InfoPageViewModel>(Constants.InfoPage);
             containerRegistry.RegisterForNavigation<OpinionsPage, OpinionPageViewModel>(Constants.OpinionsPage);
             containerRegistry.RegisterForNavigation<SharePage, SharePageViewModel>(Constants.SharePage);
-			containerRegistry.RegisterForNavigation<LogsPage, LogsPageViewModel>();
-			containerRegistry.RegisterForNavigation<InventoryPage, InventoryPageViewModel>();
+			containerRegistry.RegisterForNavigation<LogsPage, LogsPageViewModel>(Constants.LogsPage);
+			containerRegistry.RegisterForNavigation<InventoryPage, InventoryPageViewModel>(Constants.InventoryPage);
 
 			// Services
 

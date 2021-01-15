@@ -18,9 +18,9 @@ namespace FarmApp.ViewModels
 
         #region Services
 
-        public INavigationService _navigationService { get; set; }
-        public IPageDialogService _pageDialogService { get; set; }
-        public IFarmAppService _farmAppApiService { get; set; }
+        private readonly INavigationService _navigationService;
+        private readonly IPageDialogService _pageDialogService;
+        private readonly IFarmAppService _farmAppApiService;
         #endregion
 
         #region Commands
@@ -102,6 +102,7 @@ namespace FarmApp.ViewModels
             Title = LogsPageTitle;
             _navigationService = navigationService;
             _pageDialogService = pageDialogService;
+            _farmAppApiService = farmAppService;
 
             PickerGender();
             User = new User();
@@ -114,7 +115,7 @@ namespace FarmApp.ViewModels
         {
             if (string.IsNullOrEmpty(User.UserName) | string.IsNullOrEmpty(User.Password))
             {
-                await App.Current.MainPage.DisplayAlert(InvalidFieldsAlertTitle,
+                await _pageDialogService.DisplayAlertAsync(InvalidFieldsAlertTitle,
                                                         InvalidFieldsAlertDescription,
                                                         Constants.OkAlert);
             }
@@ -166,13 +167,13 @@ namespace FarmApp.ViewModels
                 string.IsNullOrEmpty(UserPerson.Password) | string.IsNullOrEmpty(ConfirmPassword))
             {
 
-                await App.Current.MainPage.DisplayAlert(
+                await _pageDialogService.DisplayAlertAsync(
                     InvalidFieldsAlertTitle, InvalidFieldsAlertDescription, Constants.OkAlert
                 );
             }
             else if (UserPerson.Password != ConfirmPassword)
             {
-                await App.Current.MainPage.DisplayAlert(
+                await _pageDialogService.DisplayAlertAsync(
                     InvalidPasswordAlertTitle, InvalidPasswordAlertDescription, Constants.OkAlert
                 );
                           
@@ -185,13 +186,13 @@ namespace FarmApp.ViewModels
                 
                 if (person != null)
                 {
-                    await App.Current.MainPage.Navigation.PushModalAsync(new HomePage());
-                    await App.Current.MainPage.DisplayAlert(
+                    await _navigationService.NavigateAsync($"/{Constants.NavigationPage}/{Constants.HomePage}");
+                    await _pageDialogService.DisplayAlertAsync(
                         SuccessSignupAlertTitle, SignUpAlertDescription, Constants.OkAlert
                      );
                 }
                 else
-                    await App.Current.MainPage.DisplayAlert(
+                    await _pageDialogService.DisplayAlertAsync(
                         FailSignupAlertTitle, FailSignupAlertDescription, Constants.OkAlert
                      );
 

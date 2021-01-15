@@ -13,8 +13,8 @@ namespace FarmApp.ViewModels
 {
 	public class InventoryPageViewModel : ViewModelBase
 	{
-		public INavigationService _navigationService { get; set; }
-		public IFarmAppService _farmAppService { get; set; }
+		private readonly INavigationService _navigationService;
+		private readonly IFarmAppService _farmAppService;
 		public ObservableCollection<ProductPharmacy> PharmacyProducts { get; set; }
 
 		public int PharmacyId { get; set; }

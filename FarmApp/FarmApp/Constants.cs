@@ -17,5 +17,6 @@ namespace FarmApp
         public const string OpinionsPage = "StoreOpinions";
         public const string SharePage = "StoreShare";
         public const string LogsPage = "LogsPage";
+        public const string InventoryPage = "InventoryPage";
     }
 }
