@@ -11,6 +11,7 @@ using Prism.Services;
 using FarmApp.Services;
 using FarmApp.Models;
 
+
 namespace FarmApp.ViewModels
 {
 
@@ -32,6 +33,7 @@ namespace FarmApp.ViewModels
         private const string SuccessLinkDescription = "Your Link has been succesfully copied";
         private const string OpenMapErrorHeader = "No map app found";
         private const string OpenMapErrorDescription = "You don't have a map installed";
+       
         #endregion
 
         public string Link { get; set; }
@@ -45,7 +47,6 @@ namespace FarmApp.ViewModels
             _navigationService = navigationService;
             _farmAppService = farmAppService;
             PharmacyId = Store.CurrentStoreId;
-            Link = GetLink();
 
             CopyCommand = new DelegateCommand(async () => await Copy());
             CopyCommand = new DelegateCommand(async () => await OpenMap());
@@ -53,16 +54,23 @@ namespace FarmApp.ViewModels
 
         async Task Copy()
         {
+            Link = await GetLink();
             await Clipboard.SetTextAsync(Link);
             await _dialogService.DisplayAlertAsync(SuccessLinkHeader, SuccessLinkDescription, Constants.OkAlert);
         }
 
+        public async Task<string> GetLink()
+        {
+            Pharmacy pharmacy = await _farmAppService.GetPharmacyAsync(PharmacyId);
+            return $"https://www.google.com/maps/search/?api=1&query={pharmacy.Longitude},{pharmacy.Latitude}";
+        }
+        
         async Task OpenMap()
         {
             Pharmacy pharmacy = await _farmAppService.GetPharmacyAsync(PharmacyId);
             var location = new Location(Decimal.ToDouble(pharmacy.Longitude), Decimal.ToDouble(pharmacy.Latitude));
             //var options = new MapLaunchOptions { NavigationMode = Xamarin.Essentials.NavigationMode.Driving };
-
+            
             try
             {
                 await Map.OpenAsync(location);
@@ -73,13 +81,6 @@ namespace FarmApp.ViewModels
             }
         }
 
-        public string GetLink()
-        {
-            // TODO: Create logic to get actual link location from google maps or some other service
-
-            Link = "https://goo.gl/maps/qwHQ4w9StkBSbvpQ6";
-            return Link;
-        }
     }
 
 }
