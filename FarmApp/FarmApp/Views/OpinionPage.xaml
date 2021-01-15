@@ -9,15 +9,19 @@
     <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" ItemsSource="{Binding Opinions}">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                    <Label Text="{Binding Name}" Grid.Row="0"/>
-                    <Label Text="{Binding Description}" Grid.Row="1"/>
-                </Grid>
+                            <Label Text="{Binding Name}" Grid.Row="0"/>
+                            <Label Text="{Binding Description}" Grid.Row="1"/>
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

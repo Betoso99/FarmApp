@@ -9,33 +9,37 @@
     <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" ItemsSource="{Binding PharmacyProducts}">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                <ViewCell>
+                    <ViewCell.View>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                    <Label Text="{Binding Name}" Grid.Column="0"/>
-                    <Grid Grid.Column="1" Padding="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <Label Text="Quantity:" Grid.Column="0" Grid.Row="0"/>
-                        <Label Text="{Binding Quantity}" Grid.Row="0" Grid.Column="1"/>
-                        <Label Text="RD$:" Grid.Row="1" Grid.Column="0"/>
-                        <Label Text="{Binding Price}" Grid.Row="1" Grid.Column="1"/>
-                        
-                    </Grid>
-                </Grid>
+                            <Label Text="{Binding Name}" Grid.Column="0"/>
+                            <Grid Grid.Column="1" Padding="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="Quantity:" Grid.Column="0" Grid.Row="0"/>
+                                <Label Text="{Binding Quantity}" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="RD$:" Grid.Row="1" Grid.Column="0"/>
+                                <Label Text="{Binding Price}" Grid.Row="1" Grid.Column="1"/>
+
+                            </Grid>
+                        </Grid>
+                    </ViewCell.View>
+                </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

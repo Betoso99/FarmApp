@@ -28,12 +28,13 @@ namespace FarmApp.ViewModels
             _navigationService = navigationService;
             _farmAppService = farmAppService;
             PharmacyId = Store.CurrentStoreId;
+            GetInfo();
         }
 
-        private async void GetInfo()
-        {
-            var pharmacy = await _farmAppService.GetAllReviewsAsync();
-            Opinions = new ObservableCollection<Review>(pharmacy);
-        }
-    }
+		private async void GetInfo()
+		{
+			var pharmacy = await _farmAppService.GetAllReviewsAsync();
+			Opinions = new ObservableCollection<Review>(pharmacy);
+		}
+	}
 }
