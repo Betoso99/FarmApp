@@ -4,7 +4,8 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FarmApp.Views.InventoryPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="LightGray">
     <ListView VerticalOptions="CenterAndExpand" HorizontalOptions="Center" ItemsSource="{Binding Products}">
         <ListView.ItemTemplate>
             <DataTemplate>

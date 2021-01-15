@@ -16,6 +16,21 @@
                 <Setter Property="PlaceholderColor" Value="{StaticResource PlaceHolderColor}" />
                 <Setter Property="TextColor" Value="{StaticResource EntryTextColor}" />
             </Style>
+            
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="200" />
+                <Setter Property="BackgroundColor" Value="#47cccc" />
+                <Setter Property="Margin" Value="50,10,50,10" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <!--<Setter Property="IsClippedToBounds" Value="True"/>-->
+            </Style>
+
+            <Style x:Key="StackStyle" TargetType="StackLayout">
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            </Style>
         </ResourceDictionary>
     </prism:PrismApplication.Resources>
 
