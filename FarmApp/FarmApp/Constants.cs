@@ -10,13 +10,13 @@ namespace FarmApp
 
         public const string OkAlert = "Ok";
 
-        public const string NavigationPage = "NavigationPage";
-        public const string HomePage = "Home";
-        public const string StorePage = "Store";
-        public const string InfoPage = "StoreInfo";
-        public const string OpinionsPage = "StoreOpinions";
-        public const string SharePage = "StoreShare";
-        public const string LogsPage = "LogsPage";
-        public const string InventoryPage = "InventoryPage";
+        public const string NavigationPage = nameof(NavigationPage);
+        public const string HomePage = nameof(HomePage);
+        public const string StorePage = nameof(StorePage);
+        public const string InfoPage = nameof(InfoPage);
+        public const string OpinionsPage = nameof(OpinionsPage);
+        public const string SharePage = nameof(SharePage);
+        public const string LogsPage = nameof(LogsPage);
+        public const string InventoryPage = nameof(InventoryPage);
     }
 }

@@ -17,12 +17,14 @@ namespace FarmApp.ViewModels
         public ObservableCollection<Review> Opinions { get; set; }
 
         private const string OpinionPageTitle = "Opinions";
+        private int PharmacyId { get; set; }
 
         public OpinionPageViewModel(INavigationService navigationService) :
             base(navigationService)
         {
             Title = OpinionPageTitle;
             _navigationService = navigationService;
+            PharmacyId = Store.CurrentStoreId;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace FarmApp.ViewModels
         #endregion
 
         public string Link { get; set; }
+        private int PharmacyId { get; set; }
 
         public SharePageViewModel(INavigationService navigationService, IPageDialogService dialogService) :
             base(navigationService)
@@ -36,6 +37,7 @@ namespace FarmApp.ViewModels
             Title = SharePageTitle;
             _dialogService = dialogService;
             _navigationService = navigationService;
+            PharmacyId = Store.CurrentStoreId;
             Link = GetLink();
 
             CopyCommand = new DelegateCommand(async () => await Copy());

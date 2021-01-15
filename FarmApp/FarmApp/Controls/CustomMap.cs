@@ -101,6 +101,8 @@ namespace FarmApp.Controls
             {
                 targetControl.Pins.Add(p);
             }
+
+            targetControl.MoveToRegion(MapSpan.FromCenterAndRadius(targetControl.Region.FarLeft, Xamarin.Forms.GoogleMaps.Distance.FromMiles(2)));
         }
     }
 }
