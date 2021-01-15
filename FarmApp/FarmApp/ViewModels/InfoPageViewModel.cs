@@ -34,32 +34,23 @@ namespace FarmApp.ViewModels
             _farmAppService = farmAppService;
             PharmacyId = Store.CurrentStoreId;
 
-            // TODO: Unfinished logic, look for logic to get the pharmcyid from StorePage
-            //PharmacyId = pharmacyId;
-
             GetInfo();
         }
 
-        //private async Task<Pharmacy> GetPharmacy()
-        //{
-        //    var pharmacy = await _farmAppService.GetPharmacyAsync(PharmacyId);
-        //    return pharmacy;
-        //}
-
 		private async void GetInfo()
 		{
-            //var pharmacy = await GetPharmacy();
+			var pharmacy = await _farmAppService.GetPharmacyAsync(PharmacyId);
 
-            //Name = pharmacy.Name;
-            //Address = pharmacy.Address;
-            //Schedule = pharmacy.Schedule;
-            //Phone = pharmacy.PhoneNumber;
+			Name = pharmacy.Name;
+			Address = pharmacy.Address;
+			Schedule = pharmacy.Schedule;
+			Phone = pharmacy.PhoneNumber;
 
-            Name = "Farmacia Carol";
-            Address = "Arroyo Hondp";
-            Schedule = "8:00 - 12:00";
-            Phone = "8096853566";
+			//Name = "Farmacia Carol";
+			//Address = "Arroyo Hondp";
+			//Schedule = "8:00 - 12:00";
+			//Phone = "8096853566";
 
-        }
+		}
 	}
 }
