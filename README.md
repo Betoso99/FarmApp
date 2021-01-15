@@ -14,22 +14,41 @@ To test the project you need to put your own [Google Maps API Key](https://devel
 * [Trello Board](https://trello.com/b/ryUF3os9/farmapp-development)
 
 ## Project Screenshots
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_3.gif" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_4.gif" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_1.gif" height="500px"/>
+<p float="left">
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_3.gif" height="600px" margin="10px"/>
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_4.gif" height="600px" margin="10px" />
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_1.gif" height="600px" margin="10px"/>
+</p>
 
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_1.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_2.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_3.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_4.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_5.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_6.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_7.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_8.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_9.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_10.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_11.jpg" height="500px"/>
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_12.jpg" height="500px"/>
+<p float="left">
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_1.jpg" height="600px"/>
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_2.jpg" height="600px"/>
+ </p>
+ 
+ <p float="left">
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_3.jpg" height="600px"/>
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_4.jpg" height="600px"/>
+ </p>
+ 
+ <p float="left">
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_5.jpg" height="600px"/>
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_6.jpg" height="600px"/>
+ </p>
+ 
+<p float="left">
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_7.jpg" height="600px"/>
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_8.jpg" height="600px"/>
+</p>
+
+<p float="left">
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_9.jpg" height="600px"/>
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_10.jpg" height="600px"/>
+ </p>
+ 
+ <p float="left">
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_11.jpg" height="600px"/>
+<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/image_12.jpg" height="600px"/>
+</p>
 
 ## Group members
 
