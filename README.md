@@ -14,8 +14,12 @@ To test the project you need to put your own [Google Maps API Key](https://devel
 * [Trello Board](https://trello.com/b/ryUF3os9/farmapp-development)
 
 ## Project Screenshots
+
+<p>
+ <img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_3.gif" height="600px" margin="10px"/>
+</p>
+ 
 <p float="left">
-<img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_3.gif" height="600px" margin="10px"/>
 <img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_4.gif" height="600px" margin="10px" />
 <img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Gifs/gif_1.gif" height="600px" margin="10px"/>
 </p>
