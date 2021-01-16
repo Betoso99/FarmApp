@@ -11,7 +11,7 @@ With this app you can look for any medicament you need and on the map it will di
 
 To test the project you need to put your own [Google Maps API Key](https://developers.google.com/maps/documentation/android-sdk/get-api-key) (with Google Maps SDK enabled) in `Constants.cs` and `AndroidManifest.xml`.
 
-* [Project's Mockup]()
+* [Project's Mockup](https://drive.google.com/file/d/1Qqn2NzJ6JucWSKrLAPVIriQGJS6P1RWe/view)
 * [Trello Board](https://trello.com/b/ryUF3os9/farmapp-development)
 
 ## Project Screenshots
