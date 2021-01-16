@@ -6,7 +6,7 @@ namespace FarmApp
 {
     public static class Constants
     {
-        public const string GoogleMapsApiKey = "AIzaSyAg6oCkN9Uvkl_UlnOLto4rLv2yfLvRVdU";
+        public const string GoogleMapsApiKey = "YOUR-API-KEY-HERE";
 
         public const string OkAlert = "Ok";
 
