@@ -1,4 +1,10 @@
-# FarmApp
+<p>
+  <h1><img src="https://github.com/Betoso99/FarmApp/blob/main/Screenshots/Images/project_icon%20PM.jpeg"
+  width="256"
+  height="128" margin="10px"/></h1>
+
+<p>
+
  
 ## Project description
 
